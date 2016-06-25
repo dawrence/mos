@@ -1,0 +1,6 @@
+<% if @vld%>
+  modal.find('.modal-body').html('<%= j render "remove" %>');
+  modal.foundation('reveal', 'open');
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>

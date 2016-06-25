@@ -1,0 +1,45 @@
+<% show_price_details ||= false%>
+<% if print_date %>
+  <tr class="bill-status-<%= bill.status %>">
+<% else %>
+  <tr class="<%= 'warning' if (bill.elapsed_time > 600 and bill.elapsed_time < 1200) %> <%= 'alert' if bill.elapsed_time > 1200 %>">
+<% end %>
+
+
+  <td><%= link_to bill.id, bill, remote: true %></td>
+  <td><%= t(bill.canceled? ? bill.previous_status.try(:to_sym) : bill.status.to_sym).titleize %></td>
+  <td><%= bill.table.name if bill.table %></td>
+  <td><%= bill.note %></td>
+
+<% unless print_date %>
+  <td><%= bill.formated_order_elapsed_time %></td>
+<% else %>
+  <td><%= bill.created_at %></td>
+<% end %>
+
+
+<td><%= number_to_currency(bill.price, :unit => "$", :delimiter => ".", :precision => 0) %></td>
+<%if show_price_details%>
+  <td>
+    <%=colombian_currency(bill.tip)%>
+  </td>
+  <td>
+    <%=colombian_currency(bill.discount_value)%>
+  </td>
+<% end %>
+<td>
+
+  <% if bill.status.to_sym == :queue %>
+    <%= link_to(raw('<i class="icon-ok icon-white"></i>'), prepared_bill_path(id: bill.id), method: :post, class: 'icon-button green prepare_bill', title: "Pasar a preparado") if allowed?(:bills_prepared)%>
+  <% elsif bill.status.to_sym == :prepared || bill.status.to_sym == :pending %>
+    <%= link_to(raw('<i class="icon-shopping-cart icon-white"></i>'), pay_bill_path(id: bill.id), method: :get, remote: true , class: 'icon-button green',title: "Pagar") if allowed?(:bills_payment)%>
+  <% end %>
+  <%= link_to(raw('<i class="icon-print icon-white"></i>'), print_bill_path(id: bill.id),target: "_blank", class: 'icon-button blue', title: "Imprimir recibo") if bill.status.to_sym == :paid && allowed?(:bills_print)%>
+  <%= link_to(raw('<i class="icon-time icon-white"></i>'), pending_bill_path(id: bill.id), method: :put, class: 'icon-button yellow',data: {confirm: "Desea marcar este pedido como pendiente de pago?"}, title: "Pasar a pendiente") if allowed?(:bills_pending) && bill.status.to_sym == :prepared %>
+  <%= link_to(raw('<i class="icon-edit icon-white"></i>'), vld_bill_path(id: bill.id), remote:true,method: :get, class: 'icon-button green', title: "Editar") if bill.status.to_sym == :queue %>
+  <%= link_to(raw('<i class="icon-ban-circle icon-white"></i>'), cancel_form_bill_path(id: bill.id), remote:true, method: :get, class: 'icon-button red', title: "Anular", data:{confirm: "Esta seguro de anular este pedido?"}) if (allowed?(:bills_nullify) && bill.status.to_sym == :prepared) || (allowed?(:bills_queue_null) && bill.status.to_sym == :queue)%>
+  <%= link_to raw('<i class="icon-random icon-white"></i>'), view_cng_table_path(bill_id: bill.id), method: :put, remote: true , class: 'icon-button blue',title: "Cambiar mesa" if [:queue,:prepared,:paid,:pending].include?(bill.status.to_sym) %>
+
+  <%= link_to raw('<i class="icon-projectfork icon-white"></i>'), bill_split_path(id: bill.id), remote: true , class: 'icon-button yellow',title: "Separar cuenta" if [:queue,:prepared].include?(bill.status.to_sym) %>
+</td>
+</tr>

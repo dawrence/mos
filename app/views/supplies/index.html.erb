@@ -1,0 +1,28 @@
+<div class="contents">
+  <div class="content shown">
+    <%= select_tag :tables, options_for_select(@supply_category.map{|sc| [sc.name.to_s.titleize, "table-#{sc.id}"]}, @supply_category.first.id) %>
+    <% @supply_category.each_with_index do |sc, i| %>
+      <div class="table <%= 'shown' if i == 0 %> item" id="table-<%= sc.id %>">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th><%= t(:menu_supply_name) %></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% sc.supplies.each do |a| %>
+              <tr>
+                <td><%= a.name %></td>
+                <td><%= link_to raw('<i class="icon-edit icon-white"></i>'), edit_supply_path(a), class: 'icon-button green'  %></td>
+                <td><%= link_to raw('<i class="icon-ban-circle icon-white"></i>'), supply_path(a), method: :delete, data: { confirm: t(:are_you_sure_?) }, class: 'icon-button red' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to "Agregar Suministro", new_supply_path(:sc_id => sc.id), class: 'new-element button bg-blue' %>
+      </div>
+    <% end %>
+  </div>
+</div>

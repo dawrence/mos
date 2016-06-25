@@ -1,0 +1,48 @@
+<div class="table" id ="supplies_overview">
+  <%= form_tag(supplies_sumarize_path, remote:true, method:'get') do |brv|%>
+    <%= text_field_tag "init_date", "", placeholder: t(:init_date), class: 'fdatepicker' %>
+    <%= text_field_tag "end_date", "", placeholder: t(:end_date), class: 'fdatepicker' %>
+    <%= button_tag raw('<i class="icon-filter icon-white"></i>'), type: "submit", class: 'button', data: {disable_with: "..."} %>
+    <div class="filters">
+      <div>
+        <%= check_box_tag 'status[]', 'queue', false, id: "status__queue" %>
+        <%= label_tag "status[][queue]", 'En Cola' %>
+      </div>
+      <div>
+        <%= check_box_tag 'status[]', 'prepared', false, id: "status__prepared" %>
+        <%= label_tag "status[][prepared]", 'Preparado' %>
+      </div>
+      <div>
+        <%= check_box_tag 'status[]', 'paid', false, id: "status__paid" %>
+        <%= label_tag "status[][paid]", 'Pagado' %>
+      </div>
+      <div>      
+        <%= check_box_tag 'status[]', 'canceled', false, id: "status__canceled" %>
+        <%= label_tag "status[][canceled]", 'Anulado' %>
+      </div>
+    </div>
+  <% end %>
+
+  <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th><%= t(:supply_name)%></th>
+          <th><%= t(:quantity)%></th>
+        </tr>
+      </thead>
+      <tbody class="supplies_overview_body">
+        <!-- inicio ciclo suministros -->
+        <% @all_supplies.each do |s| %>
+          <tr>
+            <td>
+              <%= s.supply_name %>
+            </td>
+            <td>
+              <%= s.available_quantity %>
+            </td>
+          </tr>
+        <% end %>
+        <!-- fin ciclo suministros-->
+      </tbody>
+  </table>
+</div>

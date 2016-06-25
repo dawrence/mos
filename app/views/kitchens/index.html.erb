@@ -1,0 +1,36 @@
+<div class="contents">
+  <h2 class="dark-gray"><%= "Listando Cocinas"%></h2>
+  <div class="content shown">
+    <div class="table shown">
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th><%= t(:name) %></th>
+            <th><%= "Nombre corto"%></th>
+            <th><%= t(:description) %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% @kitchens.each do |kitchen| %>
+            <tr>
+              <td><%= kitchen.name %></td>
+              <td><%= kitchen.short_name %></td>
+              <td><%= kitchen.description %></td>
+              <td><%= link_to raw('<i class="icon-edit icon-white"></i>'), edit_kitchen_path(kitchen), class: 'icon-button green' %></td>
+              <td><%= link_to raw('<i class="icon-ban-circle icon-white"></i>'), kitchen, method: :delete, data: { confirm: t(:are_you_sure_?) }, class: 'icon-button red' if kitchen.products.empty?%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="tab-links">
+  <%= link_to raw("<i class='icon-plus'></i>Nueva Cocina"), new_kitchen_path %>
+
+</div>

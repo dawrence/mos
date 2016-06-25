@@ -1,0 +1,158 @@
+<%= form_for(@bill,remote: true) do |f| %>
+  <%= f.hidden_field :table_id %>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :status, value: "queue" %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= hidden_field_tag('bill[created_at]', @bill.created_at)%>
+  <%= f.button raw('<i class="icon-save-floppy icon-white"></i>'), disable_with: t(:saving), class: "bill-submit", value: "submit", title: "Guardar Pedido" %>
+
+
+  <% if @bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bill.errors.count, "error") %> <%= t(:prohibited_this_bill_from_being_saved) %></h2>
+      <ul>
+        <% @bill.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="add-info i-left">
+      <div class="bg-blue bill-notes">
+        <%= link_to "Notas", '#', class: "white" %>
+        <%= f.text_area :note, rows: "2", cols: "15", placeholder: "Notas", class: "bill-note" %>
+      </div>
+      <div class="bg-yellow bill-people">
+        <%= f.label :people_quantity, raw('<i class="icon-groups-friends icon-white"></i>'), class: "white" %>
+        <%= f.select :people_quantity, 21.times.map {|i| [i,i]} %>
+      </div>
+    </div>
+    <div class="add-info i-right">
+      <div class="bg-green bill-total white">
+        $<%= f.text_field :price, value: (@bill.price == nil ? 0: @bill.price ), readonly: true, class: "text-right white" %>
+      </div>
+    </div>
+
+      <div class="table shown">
+          <table class="table table-striped table-hover table-bordered" id="products_ordered_list">
+            <thead>
+              <tr>
+                <th><%= t(:product) %></th>
+                <th></th>
+                <th><%= t(:ingredients) %></th>
+                <th><%= t(:additional) %></th> 
+                <th><%= t(:delete) %></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+             <% @bill.orders.each do |o|%>
+               <% for i in 1..o.quantity %>
+                 <%if o.product != nil%>
+                  <tr id= 'bill_product_<%=o.product_id%>' data-modifying='false' class='product_to_order'>
+                     <%= hidden_field_tag('bill[orders_attributes][][product_id]', o.product.menu_product.products.original.id)%>
+                     <%= hidden_field_tag('bill[orders_attributes][][ship]', o.ship) %>
+                     <%= hidden_field_tag('bill[orders_attributes][][status]', o.status) %>
+                     <td> 
+                      <span class='product_name'><%= o.product.menu_product.name %></span>
+                      <% deleted_ing = return_deleted_ingredients(o.product.menu_product.products.original, o.product)%>
+                          <ul class='product_custom_ing'>
+                            <% deleted_ing.each do |i| %>
+                              <li>
+                                Sin <%=i.supply.name%>
+                              </li>
+                            <% end %>
+                          </ul>
+                     </td>
+                     <td class='order_quantity'> 
+                       <%= hidden_field_tag('bill[orders_attributes][][quantity]', 1)%> 
+                     </td>
+                     <td> 
+                       <%= link_to_edit(products_show_ingredients_path(id: o.product.menu_product.id), :get, { remote: o.product.original, html_class: "mod_btn"}) if o.product.menu_product.modificable %>
+                     </td>
+                     <td> 
+                       <%= link_to_add('#', :get, {html_class: "additional_btn"}) if o.product.menu_product.additional %>
+                     </td>
+                     <td> 
+                       <%= link_to_cancel("rmv_bil_prd(this,#{o.product.menu_product.products.original.id},#{o.product.price})", :get, {function: true})%>
+                     </td>
+                     <td class="product_attributes">
+                      <%= hidden_field_tag('bill[orders_attributes][][product_attributes][menu_product_id]',o.product.menu_product_id) %>
+                      <%= hidden_field_tag('bill[orders_attributes][][product_attributes][original]',false) %>
+                      <%= hidden_field_tag('bill[orders_attributes][][product_attributes][price]', o.product.price) %>
+                     </td>
+                     <td class="additionals_attributes">
+                      <table class='additionals'>
+                        <tbody>
+                          <% o.product.additionals.each do |a| %>
+                            <%= raw additional_products(a.additional,a.quantity)%>
+                          <% end %>
+                        </tbody>
+                      </table>
+                     </td>
+                     <td class="ingredients_attributes">
+                      <% if !o.product.original %>                      
+                          <%= show_product_custom_ingredients(o.product,true) %>
+                     <% end %>
+                     </td>
+                  </tr>
+                  <% end %>
+               <% end %>
+              <%end%>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<div id = "additionals_content" style ="display:none;">
+  <div class="show_additionals" >
+      <div class="additional_data">
+        <ul>
+          <li class="bg-green"><%= link_to t(:accept), "#", class: "close_additionals white" %></li>
+          <%  if @additional_class != nil %>
+            <% @additional_class.products.includes(:menu_product).each do |additional|%>
+              <li data-additional ='<%= additional.id%>' data-price='<%= additional.price%>' class="bg-blue"> 
+                <%= link_to_function additional.menu_product.name, "additional_to_product('#{escape_javascript(additional_products(additional))}',#{additional.id},#{additional.price})", class: "white" %>
+              </li>
+           <% end %>
+         <% end %>
+       </ul>
+    </div>
+  </div> 
+</div>
+
+
+<div class="label-container label-right">
+  <div>
+    <%= link_to raw('<i class="icon-addtolist icon-white"></i>'), '#', class: "trigger" %>
+    <div class="scroll">
+      <ul class="accordion" data-accordion>
+        <% @product_families.each_with_index do |pf, i| %>
+          <li class="accordion-navigation">
+            <%= link_to pf.name, "#pf#{pf.id}" %>
+            <div id="pf<%= pf.id %>" class="content">
+              <%= raw add_product_link(pf, i,@bill.id) %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="label-container label-left open">
+  <div>
+    <div id="additionals" class="scroll">
+    </div>
+    <div id="customization" class="scroll">
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,12 @@
+<!-- inicio ciclo suministros -->
+<% @supplies.each do |s| %>
+  <tr>
+    <td>
+      <%= s.supply_name %>
+    </td>
+    <td>
+      <%= s.available_quantity %>
+    </td>
+  </tr>
+<% end %>
+<!-- fin ciclo suministros-->

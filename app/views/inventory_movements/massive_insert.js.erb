@@ -1,0 +1,6 @@
+<% if @vld%>
+	window.location.href = "<%= inventory_movements_path %>";
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>
+

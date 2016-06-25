@@ -1,0 +1,29 @@
+<div class="contents">
+  <div class="content shown" id="normal-tables">
+    <%= render "bills/on_tables/bills_by_table", tables: @normal_tables %>
+  </div>
+  <div class="content" id="auxiliar-tables">
+    <%= render "bills/on_tables/bills_by_table", tables: @aux_tables %>
+  </div>
+  <div class="content" id="reports">
+    <%= select_tag :tables, options_for_select(report_options) %>
+    <%= render "bills/overviews/bills_report_view" if allowed?(:bills_reports_history)%>
+    <%= render "bills/overviews/products_overview" if allowed?(:product_report) %>
+    <%= render "bills/overviews/supplies_overview" if allowed?(:supplies_history)%>
+  </div>
+  <div class="content" id="sales">
+    <%= select_tag :tables, options_for_select(sales_options) %>
+    <%= render "bills/overviews/bills_overview" %>
+    <%= render "bills/overviews/bills_pending_overview" if allowed?(:bills_pending_report) %>
+    <%= render "bills/overviews/bills_paid_overview" if allowed?(:bills_today_paid_report)%>
+    <%= render "bills/overviews/closeout_view" if allowed?(:closeout_report) %>
+    <%= render "bills/overviews/closing_stage" if allowed?(:closing_stage_management)%>
+  </div>
+</div>
+
+<div class="tab-links">
+  <%= link_to raw("<i class='icon-shirtbuttonalt'></i>Mesas"), '#', data: {tab: "normal-tables"}, class: "active binded" %>
+  <%= link_to raw("<i class='icon-shirtbutton'></i>Auxiliares"), '#', data: {tab: "auxiliar-tables"}, class: "binded" %>
+  <%= link_to raw("<i class='icon-report'></i>Reportes"), '#', data: {tab: "reports"}, class: "binded" if is_owner or is_admin %>
+  <%= link_to raw("<i class='icon-moneybag'></i>Ventas"), '#', data: {tab: "sales"}, class: "binded" %>
+</div>

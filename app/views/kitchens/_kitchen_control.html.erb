@@ -1,0 +1,13 @@
+<div id="kitchen_container" class="control">
+	<ul class="bills">
+		<% @bills.each_with_index do |b, i| %>
+			<% if b.has_orders?(kitchen_id)%>
+				<li class="bill-summary">
+					<%= link_to remove_bill_path(id: b.id,kitchen_id: kitchen_id), method: :post, class: "prepare_bill" do %>
+						<%= render "bills/bill_summary", b: b, i: i, kitchen_id: kitchen_id, scope: "queue"%>
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>

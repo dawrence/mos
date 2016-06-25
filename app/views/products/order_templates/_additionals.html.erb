@@ -1,0 +1,13 @@
+<tr data-additional-id="<%=additional.id%>" class='product_additional' data-price="<%=additional.price%>" >
+  <td>
+  	<%= additional.menu_product.name %>
+  	<%= hidden_field_tag('bill[orders_attributes][][product_attributes][additionals_attributes][][additional_id]',additional.id) %>
+  </td>
+  <td class='add_quantity'>
+    <span>x <%=quantity %></span>
+    <%= hidden_field_tag('bill[orders_attributes][][product_attributes][additionals_attributes][][quantity]',quantity) %>
+  </td>
+  <td class='remove_add'>
+  	<%= link_to_function(raw('<i class="icon-ban-circle icon-white"></i>'), "delete_additional(this,#{additional.price})",class: 'action_button red') %>
+  </td>
+</tr>

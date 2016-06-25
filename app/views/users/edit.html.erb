@@ -1,0 +1,7 @@
+<%= render "form" %>
+
+
+<div class="tab-links">
+  <%= link_to raw("<i class='icon-refresh'></i>Reiniciar"), reset_password_path(id: @user.id), remote: true, method: :post, class: "warning-square" %>
+  <%= link_to raw("<i class='icon-circledelete'></i>Borrar"), user_path(id: @user.id), method: :delete, class: "alert-square" %>
+</div>

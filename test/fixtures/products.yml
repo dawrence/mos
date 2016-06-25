@@ -1,0 +1,62 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+p_1:
+  menu_product: mp_1
+  original: true
+  price: 100
+
+p_2:
+  menu_product: mp_2
+  original: true
+  original_copy: false
+  price: 200
+
+p_3:
+  menu_product: mp_3
+  original: true
+  price: 300
+
+p_4:
+  menu_product: mp_4
+  original: true
+  price: 400
+
+p_5:
+  menu_product: mp_5
+  original: true
+  price: 500
+# control
+p_6:
+  menu_product: mp_5
+  original: false
+  price: 500
+# 7 == 6
+p_7:
+  menu_product: mp_5
+  original: false
+  price: 500
+# 8 not equal by supply with 6
+p_8:
+  menu_product: mp_5
+  original: false
+  price: 500
+# 9 not equal by quantity with 6
+p_9:
+  menu_product: mp_5
+  original: false
+  price: 500
+# 10  not equal by ingredients length with 6
+p_10:
+  menu_product: mp_5
+  original: false
+  price: 500
+# 11 not equal by price with 6
+p_11:
+  menu_product: mp_5
+  original: false
+  price: 5000
+# 12 not equal by product with 7
+p_12:
+  menu_product: mp_1
+  original: false
+  price: 500

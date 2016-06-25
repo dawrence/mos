@@ -1,0 +1,9 @@
+<div class="show_ingredients" <%= none_display ? "style=display:none;" : "" %> >
+    <div class="product_data">
+        <ul>
+            <li class="bg-red"><%= link_to "Cancelar","#", class: "close_ingredients white" %></li>
+            <li class="bg-green"><%= link_to "Guardar","#", class: "ok_ingredients white"%></li>
+            <%= raw show_products_attributes(product)%>
+        </ul>
+    </div>
+</div>

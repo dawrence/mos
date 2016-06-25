@@ -1,0 +1,109 @@
+<%= form_for(@menu_product) do |f| %>
+	<%= f.hidden_field :product_family_id %>
+	<%= f.button raw('<i class="icon-save-floppy icon-white"></i>'), disable_with: t(:saving), class: "product-submit", value: "submit", title: "Guardar Producto" %>
+
+	<% if @menu_product.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@menu_product.errors.count, "error") %> <%= t(:prohibited_this_product_from_being_saved) %></h2>
+			<ul>
+			<% @menu_product.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+
+	<div class="contents">
+
+		<div class="content shown" id="menu-data">
+			<h4 class="dark-gray">Datos del menú</h4>
+			<div class="field columns small-6">
+				<%= f.check_box :modificable %><%= f.label :modificable, t(:modificable) %>
+			</div>
+			<div class="field columns small-6">
+				<%= f.check_box :additional %><%= f.label :additional, t(:additional) %>
+			</div>
+			<div class="field columns small-12">
+				<%= f.text_field :name, placeholder: t(:place_product_name) %>
+			</div>
+			<div class="field columns small-12">
+				<%= f.text_area :description, placeholder: t(:place_product_description), rows: 3 %>
+			</div>
+			<h1>Cocinas</h1>
+			<div class="row">
+			  <fieldset class="medium-4 small-12 columns fields">
+			  	<%= hidden_field_tag "menu_product[products_attributes][#{@product ? 0 : ''}][product_kitchens_attributes][][product_id]",@product.id if @product%>
+			    <% Kitchen.all.each_with_index do |kitchen,i|%>
+			      <%= check_box_tag "menu_product[products_attributes][#{@product ? 0 : ''}][product_kitchens_attributes][][kitchen_id]", kitchen.id, @product && @product.has_kitchen?(kitchen) ? true : false%>
+			      <%= label_tag kitchen.name %>
+			    <% end %>
+			  </fieldset>
+			</div>
+		</div>
+
+		<div class="content" id="product-data">
+			<h4 class="dark-gray">Datos del producto</h4>
+			<%= f.fields_for :products, @product do |p|%>
+				<div class="row collapse prefix-radius">
+	        <div class="small-3 columns">
+	          <span class="prefix">$</span>
+	        </div>
+	        <div class="small-9 columns">
+	          <%= p.text_field :price, placeholder: t(:place_product_price), required: true%>
+	        </div>
+	      </div>
+				<div>
+					<%= select_tag :tables, options_for_select(@supply_categories.map{|sc| [sc.name.to_s.titleize, "table-#{sc.id}"]}, @supply_categories.first.id) %>
+
+					<% @supply_categories.each_with_index do |sc,i| %>
+						<div class="table <%= 'shown' if i == 0 %> item" id="table-<%= sc.id %>">
+
+							<table class="table table-striped table-hover table-bordered">
+								<thead>
+									<tr>
+										<th><%= t(:supply) %></th>
+										<th><%= t(:quantity) %></th>
+										<th><%= t(:quantifiable) %></th>
+									</tr>
+								</thead>
+								<tbody>
+									<% sc.supplies.each_with_index do |su, i| %>
+										<tr>
+										 	<td>
+											 	<%= hidden_field_tag "menu_product[products_attributes][0][ingredients_attributes][][supply_id]", su.id %>
+												<%= label_tag su.name %>
+											</td>
+											<% supplied = @product.ingredients.find{|o| o.supply_id == su.id} if @product%>
+											<% if supplied %>
+												<td>
+													<%=number_field_tag("menu_product[products_attributes][0][ingredients_attributes][][quantity]",supplied.quantity,min:0,step:0.5)%>
+												</td>
+												<td>
+													<%=check_box_tag("menu_product[products_attributes][0][ingredients_attributes][][quantifiable]",'true',supplied.quantifiable)%>
+												</td>
+											<% else %>
+												<td>
+													<%=number_field_tag("menu_product[products_attributes][0][ingredients_attributes][][quantity]",0,min:0,step:0.5)%>
+												</td>
+												<td>
+													<%=check_box_tag("menu_product[products_attributes][0][ingredients_attributes][][quantifiable]",'true',false)%>
+												</td>
+											<% end %>
+										</tr>
+									<% end %>
+								</tbody>
+							</table>
+
+						</div>
+					<% end %>						
+				</div>
+			<% end %>
+		</div>
+
+<% end %>
+
+<div class="tab-links">
+  <%= link_to raw("<i class='icon-restaurantmenu'></i>Menu"), '#', data: {tab: "menu-data"}, class: "active binded" %>
+  <%= link_to raw("<i class='icon-deathstarbulding'></i>Producto"), '#', data: {tab: "product-data"}, class: "binded" %>
+</div>

@@ -1,0 +1,17 @@
+@import 'variables';
+
+body.sessions{
+	form.new_user{
+		width: 100%;
+		margin: 0;
+		display: inline-block;
+		input[type="submit"]{
+			display: block;
+			width: 100%;
+		}
+		a{
+			font-weight: 700;
+			color: $gray;
+		}
+	}
+}

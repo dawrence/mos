@@ -1,0 +1,7 @@
+$("#products_selection").fadeOut();
+$("#additionals").fadeOut();
+$("#customization").fadeOut(function(){
+	$("#customization").html('<%= j render "product_ingredients" %>').fadeIn();
+});
+
+$('#botActions .scope').addClass('fixed-bug');

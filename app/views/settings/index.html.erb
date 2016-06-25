@@ -1,0 +1,50 @@
+<h1>Listing settings</h1>
+
+<table>
+  <tr>
+    <th>NIT</th>
+    <th>Razon social</th>
+    <th>Direccion del local</th>
+    <th>Ciudad del local</th>
+    <th>Telefono del local</th>
+    <th>email</th>
+    <th>Prefijo de factura</th>
+    <th>Rango de facturacion inferior</th>
+    <th>Rango de facturacion superior</th>
+    <th>Impuesto al consumo (IMPC)</th>
+    <th>Texto propina</th>
+    <th>Regimen</th>
+    <th>Resolucion</th>
+    <th>Fecha resolucion</th>
+    <th>Fecha de corte de facturacion</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @settings.each do |setting| %>
+  <tr>
+    <td><%= setting.nit %></td>
+    <td><%= setting.business_name %></td>
+    <td><%= setting.address %></td>
+    <td><%= setting.city %></td>
+    <td><%= setting.telephone %></td>
+    <td><%= setting.mail %></td>
+    <td><%= setting.prefix %></td>
+    <td><%= setting.lower_range %></td>
+    <td><%= setting.upper_range %></td>
+    <td><%= setting.consumption_tax %></td>
+    <td><%= setting.tip_text %></td>
+    <td><%= setting.billing_system_resolution %></td>
+    <td><%= setting.billing_resolution %></td>
+    <td><%= setting.date %></td>
+    <td><%= setting.cutoff_date %></td>
+    <td><%= link_to 'Show', setting %></td>
+    <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
+    <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Setting', new_setting_path %>

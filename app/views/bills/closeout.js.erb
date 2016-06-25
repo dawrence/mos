@@ -1,0 +1,8 @@
+<% if @vld%>
+  $('#closeout_body').empty();
+  $('#closeout_body').html('<%= j render "bills/overviews/closeout" %>');
+  $("#closeout_total").text("<%= colombian_currency(@price)%>");
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>
+

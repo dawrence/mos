@@ -1,0 +1,85 @@
+<% object ||= {} %>
+<div class="table shown bills-report" id ="<%= object[:table] ? "bills_report_view_#{object[:table].id}" : "bills_report_view" %>">
+	<%= form_tag(bills_report_path, remote:true, method:'get') do |brv|%>
+		<%= hidden_field_tag "table_id", object[:table] ? object[:table].id : "" %>
+		<%= text_field_tag "init_date", "", placeholder: t(:init_date), class: 'fdatepicker' %>
+		<%= text_field_tag "end_date", "", placeholder: t(:end_date), class: 'fdatepicker' %>
+		<%= button_tag raw('<i class="icon-filter icon-white"></i>'), type: "submit", class: 'button', data: {disable_with: "..."} %>
+
+		<div class="filters">
+			<% if is_owner || is_admin %>
+				<div>
+					<%= check_box_tag 'payment_type[]', 'cortesy', id: "payment_type__cortesy"  %>
+					<%= label_tag "payment_type[][cortesy]", 'Cortesia' %>
+				</div>
+				<div>
+					<%= check_box_tag 'payment_type[]', 'devolution', id: "payment_type__devolution"  %>
+					<%= label_tag "payment_type[][devolution]", 'Devolucion' %>
+				</div>
+				<div>
+					<%= check_box_tag 'payment_type[]', 'card', id: "payment_type__card"  %>
+					<%= label_tag "payment_type[][card]", 'Tarjeta' %>
+				</div>
+				<div>
+					<%= check_box_tag 'payment_type[]', 'cash', id: "payment_type__cash" %>
+					<%= label_tag "payment_type[][cash]", 'Efectivo' %>
+				</div>
+			<% end %>
+		</div>
+		<div>
+			<table border="0" style="width:100%">
+			  <tr>
+			    <td>
+					<%= label_tag 'En Cola' %>
+					<%= check_box_tag 'status[]', 'queue'  %>
+				</td>
+			    <td>
+			    	<%= label_tag 'Preparado' %>
+					<%= check_box_tag 'status[]', 'prepared'  %>
+			    </td>		
+			    <td>
+			    	<%= label_tag 'Pagado' %>
+					<%= check_box_tag 'status[]', 'paid'  %>
+			    </td>
+			    <td>
+			    	<%= label_tag 'Anulado' %>
+					<%= check_box_tag 'status[]', 'canceled' %>
+			    </td>
+			  </tr>
+			  <tr>
+		  		<td>
+		  			<%= label_tag 'Total' %>
+		  			<span class="bills_report_total_queue"></span>
+		  		</td>
+		  		<td>
+		  			<%= label_tag 'Total' %>
+		  			<span class = "bills_report_total_prepared"></span>
+		  		</td>
+		  		<td>
+		  			<%= label_tag 'Total' %>
+		  			<span class = "bills_report_total_paid"></span>
+		  		</td>
+		  		<td>
+		  			<%= label_tag 'Total' %>
+		  			<span class = "bills_report_total_canceled"></span>
+		  		</td>
+			  </tr>
+			</table>
+		</div>
+		<div>
+			<table style="">
+				<thead>
+					<th>Total Pagado:</th>
+					<th>Total Propinas:</th>
+					<th>Total descuentos:</th>
+				</thead>
+				<tbody>
+					<td class="bills_report_total">$0</td>
+					<td class="bills_report_tip">$0</td>
+					<td class="bills_report_discount">$0</td>
+				</tbody>
+			</table>
+		</div>
+    <% end %>
+     <%= render "bills/overviews/bills_table", object: {bills:[], show_date: true, show_price_details: true,body_class: "bills_report_body"}%>
+</div>

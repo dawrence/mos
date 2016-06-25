@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t(:supply)+':' %></b>
+  <%= @inventory_movement.suply_id %>
+</p>
+
+<p>
+  <b><%= t(:movement_type)+':' %></b>
+  <%= @inventory_movement.movement_type %>
+</p>
+
+<p>
+  <b><%= t(:adjustment)+':' %></b>
+  <%= @inventory_movement.adjustment %>
+</p>
+
+<p>
+  <b><%= t(:quantity)+':' %></b>
+  <%= @inventory_movement.quantity %>
+</p>
+
+<p>
+  <b><%= t(:description)+':' %></b>
+  <%= @inventory_movement.description %>
+</p>
+
+
+<%= link_to image_tag('edit.png'), edit_inventory_movement_path(@inventory_movement), class: 'action_button' %> |
+<%= link_to image_tag('back.png'), inventory_movements_path, class: 'action_button' %>

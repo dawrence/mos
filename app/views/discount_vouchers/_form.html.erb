@@ -1,0 +1,29 @@
+<%= form_for(@discount_voucher) do |f| %>
+  <% if @discount_voucher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@discount_voucher.errors.count, "error") %> <%= t(:prohibited_this_discount_voucher_from_being_saved) %></h2>
+
+      <ul>
+      <% @discount_voucher.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field columns small-12 medium-4">
+    <%= f.label :name, t(:name) %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label :discount_type, t(:discount_type) %>
+    <%= f.select :discount_type, [["Porcentaje", "per"], ["Valor", "val"],["Variable", "var"]] %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label :value, t(:value) %>
+    <%= f.text_field :value %>
+  </div>
+  <div class="actions columns small-12">
+    <%= f.submit t(:save), disable_with: t(:saving), class: "button success"  %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<div class="table shown" id ="bills_overview">
+  <% if allowed?(:bills_z_report)%>
+    <%= form_tag(print_z_report_path, method:'get', target: '_new') do |brv|%>
+      <%= text_field_tag "z_day", Time.now.strftime("%d/%m/%Y"), class: 'fdatepicker' %>
+      <%= button_tag raw('<i class="icon-squarez icon-white"></i>'), type: "submit", title: "Generar Reporte Z", class: 'button' %>
+    <% end %>
+  <% end %>
+    
+    <%= render "bills/overviews/bills_table", object: {bills:@bills,show_date: false} %>
+
+</div>

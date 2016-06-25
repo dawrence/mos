@@ -1,0 +1,43 @@
+<%= form_for(@inventory_movement) do |f| %>
+  <% if @inventory_movement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inventory_movement.errors.count, "error") %> <%= t(:prohibited_this_inventory_movement_from_being_saved) %></h2>
+
+      <ul>
+      <% @inventory_movement.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="fluid-row">
+    <div class="span6">
+      <div class="field">
+        <%= hidden_field_tag "inventory_movement[supply_id]",  @supply.id  %>
+      </div>
+      <div class="field">
+        <%= f.label :adjustment, t(:adjustment) %>
+        <%= f.check_box :adjustment %>
+      </div>
+      <div class="field">
+        <%= f.label :movement_type, t(:movement_type) %>
+        <%= f.select :movement_type, options_for_select([[t(:incoming), "in"], [t(:outgoing), "out"]]) %>
+      </div>
+      <div class="field">
+        <%= f.label :quantity, t(:quantity) %>
+        <%= f.text_field :quantity %>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="field">
+        <%= f.label :description, t(:description) %>
+        <%= f.text_area :description, rows: 10 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t(:save), disable_with: t(:saving), class: "btn btn-inverse btn-mini action_button" %>
+  </div>
+<% end %>

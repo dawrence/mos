@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+mp_1:
+  name: MenuProduct_1
+  product_family: pf_1
+  description: MyText
+
+mp_2:
+  name: MenuProduct_2
+  product_family: pf_2
+  description: MyText
+
+mp_3:
+  name: MenuProduct_3
+  product_family: pf_2
+  description: MyText
+
+mp_4:
+  name: MenuProduct_4
+  product_family: pf_1
+  description: MyText
+
+mp_5:
+  name: MenuProduct_5
+  product_family: pf_2
+  description: MyText

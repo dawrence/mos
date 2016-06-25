@@ -1,0 +1,66 @@
+
+<div class="bill-summary">
+	<%= form_tag bill_split_path do %>
+		<%=hidden_field_tag "id", @bill.id%>
+		<h5>
+			<span><%= @bill.table.description if @bill.table %></span>
+			<span><%= l @bill.created_at.in_time_zone('America/Bogota'), format: :short %></span>
+		</h5>
+		<table class="product">
+			<thead>
+				<tr>
+					<th>Producto</th> 
+					<th>Precio</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @bill.orders.each do |order| %>
+					<% if order.product %>
+						<tr class="<%=order.prepared? ? 'line-through' : '' %>">
+							<td>
+								<%= raw(order.product.menu_product.name) %>
+								<% extras = order.product.additionals %>
+
+								<% unless order.product.original %>
+									<% others = return_deleted_ingredients(order.product.get_original_product, order.product) %>
+
+									<% if others.any? %>
+										<ul class="ingredient">					
+											<% others.each_with_index do |o, k| %>
+												<li>Sin <%= o.supply.name %></li>
+											<% end %>
+										</ul>
+									<% end %>
+
+								<% end %>
+
+								<% if extras.any? %>
+									<ul class="add">
+										<% extra_price = 0 %>
+										<% extras.each do |e| %>
+											<li>
+												Extra de <%= e.additional.menu_product.name %> <span>x<%= e.quantity %></span>
+												<% extra_price += e.quantity.to_i*(e.unit_price==0 ? e.additional.price : e.unit_price) %>
+											</li>
+										<% end %>						
+									</ul>
+								<% end %>
+
+							</td>
+
+							<td>
+								<%= colombian_currency(order.quantity.to_i * (order.unit_price == 0 ? order.product.menu_product.product.price : order.unit_price) + extra_price.to_f) %>
+							</td>
+
+							<td><%= check_box_tag "orders[]", order.id %></td>
+						</tr>
+					<% end %>
+				<% end %>
+
+			</tbody>
+		</table>
+
+		<%= submit_tag "Separar", class: "button success" %>
+	<% end %>
+</div>

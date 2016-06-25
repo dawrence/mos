@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+s_1:
+  name: Supply_1
+  supply_category: sc_1
+
+s_2:
+  name: Supply_2
+  supply_category: sc_1
+
+s_3:
+  name: Supply_3
+  supply_category: sc_2
+  
+s_4:
+  name: Supply_4
+  supply_category: sc_2
+  
+s_5:
+  name: Supply_5
+  supply_category: sc_3
+  

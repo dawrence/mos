@@ -1,0 +1,5 @@
+<% if @bill.is_unlocked%>
+  $(window.location.replace('<%= edit_bill_path(@bill) %>'));
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>

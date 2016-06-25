@@ -1,0 +1,33 @@
+<% content_for :controls do %>
+  <%= link_to raw('<i class="icon-arrow-left icon-white"></i>'), users_path %>
+<% end %>
+<h2 class="dark-gray"><%= @user.new_record? ? "Nuevo" : "Editar" %> Usuario</h2>
+<%= form_for(@user) do |f| %>
+  <ul class="tabs" data-tab>
+    <li class="tab-title active"><a href="#info">Datos de Usuario</a></li>
+    <li class="tab-title"><a href="#privileges">Privilegios</a></li>
+    <li class="tab-title"><a href="#kitchens">Cocinas</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div class="content active" id="info">
+      <%= render partial: "info", locals: {f: f} %>
+    </div>
+    <div class="content" id="privileges">
+      <%= render partial: "privileges", locals: {f: f} %>
+    </div>
+    <div class="content" id="kitchens">
+      <%= render partial: "kitchens", locals: {f: f} %>
+    </div>
+  </div>
+  <div class="actions columns small-12">
+    <%= f.submit t(:save), disable_with: t(:saving), class: "button success"  %>
+  </div>
+<% end %>
+
+<% if @user.errors.any? %>
+  <% @user.errors.each do |attribute, error| %>
+    <% if error[0] == '*' %>
+      <p style="color:red;"> <%= error %> </p>
+    <% end %>  
+  <% end %>
+<% end %>

@@ -1,0 +1,8 @@
+<% if @bill.is_unlocked && @bill.status != 'paid'%>
+	modal.find('.modal-body').html('<%= j render "edit_table" %>');
+	modal.foundation('reveal', 'open');
+<% elsif !@bill.is_unlocked %>
+	alert('<%= show_alert(@notice) %>');
+<% elsif @bill.status == 'paid'%>
+	alert('<%= show_alert(t(:forget_to_refresh)) %>');
+<% end %>

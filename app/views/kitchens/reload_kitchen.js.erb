@@ -1,0 +1,11 @@
+kitchen_container.animate({opacity: 0}, 200, function(){
+	kitchen_container.empty();
+	<% if params[:type] == "control" %>
+		kitchen_container.html('<%= j render "kitchen_control" %>');
+	<% else %>
+		kitchen_container.html('<%= j render "kitchen" %>');
+	<% end %>
+	kitchen_container.animate({opacity: 1}, 200);
+	initKitchenMasonry();
+});
+

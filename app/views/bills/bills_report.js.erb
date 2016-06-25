@@ -1,0 +1,18 @@
+var bills_report_view = $('#<%= @table ? "bills_report_view_#{@table.id}" : "bills_report_view"%>');
+var bills_report_body = bills_report_view.find(".bills_report_body");
+var bills_report_total = bills_report_view.find(".bills_report_total");
+<% if @vld%>
+  bills_report_body.empty();
+  bills_report_body.html('<%= j render "bills_report" %>');
+  bills_report_view.find(".bills_report_total").text("<%= colombian_currency(@price)%>");
+  bills_report_view.find(".bills_report_total_queue").text("<%= colombian_currency(@total_queue)%>");
+  bills_report_view.find(".bills_report_total_prepared").text("<%= colombian_currency(@total_prepared)%>");
+  bills_report_view.find(".bills_report_total_paid").text("<%= colombian_currency(@total_paid)%>");
+  bills_report_view.find(".bills_report_discount").text("<%= colombian_currency(@total_discount)%>");
+  bills_report_view.find(".bills_report_tip").text("<%= colombian_currency(@total_tip)%>");
+  bills_report_view.find(".bills_report_total_canceled").text("<%= colombian_currency(@total_canceled)%>");
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>
+	bills_report_view.find(".bill_report_submit").show();
+  bills_report_view.find(".wait-header").hide();

@@ -1,0 +1,23 @@
+<div class="table" id ="closeout_view">
+  
+  <%= form_tag(closeout_path,remote:true, method:'get') do |cl|%>
+    <%= text_field_tag "init_date", "", placeholder: t(:init_date), class: 'fdatepicker' %>
+    <%= text_field_tag "end_date", "", placeholder: t(:end_date), class: 'fdatepicker' %>
+    <%= button_tag raw('<i class="icon-filter icon-white"></i>'), type: "submit", class: 'button', data: {disable_with: "..."} %>
+    <div>
+      <b>Total:</b>
+      <span id="closeout_total"></span>
+    </div>
+  <% end %>
+  <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre del Producto</th>
+          <th><%= t(:quantity)%></th>
+          <th><%= t(:price)%></th>
+        </tr>
+      </thead>
+      <tbody id="closeout_body">
+      </tbody>
+  </table>
+</div>

@@ -1,0 +1,35 @@
+<% object[:show_summary] ||= false%>
+<% object[:show_price_details] ||= false%>
+<table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>No pedido</th>
+        <th><%= t(:bill_status) %></th>
+        <th><%= t(:table)%></th>
+        <th><%= t(:notes)%></th>
+        <% if object[:show_date] %>
+          <th>Fecha</th>
+        <% else %>
+          <th><%= t(:time_delayed)%></th>
+        <% end %>
+        <th>Valor</th>
+        <% if object[:show_price_details] %>
+          <th> Propina </th>
+          <th> Descuento </th>
+        <% end %>
+        <th><%= t(:action) %></th>
+      </tr>
+    </thead>
+    <tbody <%="class=#{object[:body_class] if object[:body_class]}"%>>
+      <% object[:bills].each do |ab| %>
+         <%= raw render_bill(ab,object[:show_date],object[:show_price_details], true) %>
+      <% end %>
+      <% if object[:show_summary] %>
+        <tr class="bg-blue last-row">
+          <td class="text-left white last-left" colspan="3"><b>TOTAL</b></td>
+          <td class="text-right white last-right" colspan="5"><b><%= colombian_currency(object[:bills].inject(0){|sum, p| sum + p.price}) %></b></td>
+          <td><%= link_to "Agrupar Todas", group_bills_path(id: object[:table].id),method: :post, class: "button alert marginless", data_confirm: "¿Está seguro?" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,5 @@
+<% if @vld%>
+  $(window.location.replace('<%= bills_url %>'));
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>

@@ -1,0 +1,8 @@
+<div class="row">
+  <fieldset class="medium-4 small-12 columns fields">
+    <% Kitchen.all.each_with_index do |kitchen,i|%>
+      <%= check_box_tag "[kitchens_attributes][][kitchen_id]",kitchen.id, @user.allowed_kitchen?(kitchen)%>
+      <%= label_tag kitchen.name %>
+    <% end %>
+  </fieldset>
+</div>

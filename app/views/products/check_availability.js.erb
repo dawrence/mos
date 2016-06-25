@@ -1,0 +1,21 @@
+var flag, array,product_length;
+flag = true;
+array = <%= raw @supplies %>;
+product_length = parseInt($("tr[id=bill_product_<%=@product.id%>").length);
+$.each(array,function(key,value){
+	if ((value.inventory - (value.quantity + product_length)) < 0 )
+	{
+		flag = false;
+		return;
+	}
+});
+
+if (flag )
+{
+  $("#products_ordered_list").children("tbody").append("<%=escape_javascript(raw(product_original_to_order(@product)))%>");
+	$("#bill_price").val(parseInt($("#bill_price").val()) + parseInt("<%=@product.price%>"));
+}
+else
+{
+	alert('<%= escape_javascript(show_alert(@notice) ) %>');
+}

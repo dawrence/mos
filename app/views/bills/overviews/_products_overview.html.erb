@@ -1,0 +1,26 @@
+<div class="table" id ="products_overview">
+  <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th><%= t(:quantity)%></th>
+          <th><%= t(:product)%></th>
+          <th><%= t(:total_price)%></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |p| %>
+        <tr>
+          <td>
+            <%= p.size %>
+          </td>
+          <td>
+            <%= p.product_name %>
+          </td>
+          <td>
+            <%= colombian_currency(p.price) %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>

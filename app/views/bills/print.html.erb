@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>test</title>
+	  <style type="text/css">
+	  @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+		  body{
+		  	font-family: Arial, Helvetica, sans-serif;
+		  	font-size: 16px;
+		  	padding: 0px;
+		  	margin: 0px;
+		  }
+	  	div.bill{
+	  		position: relative;
+	  		width: 300px;	  		
+	  		box-sizing:border-box;
+				-moz-box-sizing:border-box; /* Firefox */
+	  	}
+	  	p {
+	  		margin: 0;
+	  		padding: 0;
+	  	}
+	  	h3{
+	  		text-align: center;
+	  		font-size: 18px;
+	  		margin: 0.5rem 0;
+	  	}	
+	  	h4{
+	  		margin: 0.2rem 0;
+	  	}
+	  	ul li span:first-child{
+	  		width: 150px;
+	  		display: inline-block;
+	  	}
+	  	span.price{
+	  		font-weight: bold;
+	  	}
+	  	footer{
+	  		margin-top: 0.2rem;
+	  		text-align: justify;
+	  		font-size: 0.9rem;
+	  	}
+	  </style>
+	</head>
+	<body onload="window.print();">
+		<div class="bill">
+			<h3 class="bill-company"><%= @setting.business_name.upcase %></h3>
+			<h4><%="NIT: #{@setting.nit.upcase}" %></h4>
+			<p><%=@setting.address %></p>
+			<p><%=@setting.city.upcase %></p>	
+			<p><%="TEL: #{@setting.telephone}" %></p>	
+			<% if B_INCREMENT && ([:cash, :card].include? @bill.payment_type.to_sym )%>	
+				<p><b>Factura de Venta No: <span style="color:red;"><%= "#{@setting.prefix.upcase}-#{@bill.billing_number}"%></span></b></p>
+			<% end %>
+			<span>
+				<b><%= t(:date)%></b>
+				<i><%= @bill.created_at.strftime("%d/%m/%Y %H:%M") %></i>
+			</span>
+			<h4><%= "#{t(:table)}: #{@bill.table.description}" %></h4>
+			<%if @bill.client_name && !@bill.client_name.empty?%><p><%= "#{@bill.client_name.upcase}" %></p><%end%>
+			<%if @bill.client_phone && !@bill.client_phone.empty?%><p><%="TEL: #{@bill.client_phone}"%></p><% end %>
+			<%if @bill.client_address && !@bill.client_address.empty?%><p><%=@bill.client_address.upcase%></p><%end%>
+			<p><%="pedido: #{@bill.id}"%></p>
+			<p><%="Observaciones: #{@bill.note}"%></p>
+			
+			<p>
+				<i><%= "personas en la mesa: #{@bill.people_quantity}" %></i>
+			</p>
+			<h3><%= t(:products) %></h3>
+			
+
+			<table>
+				<thead>
+					<tr>
+						<th>CANT</th>
+						<th>DESC</th>
+						<th>PRECIO</th>
+						<th>TOTAL</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @bill.orders.each_with_index do |order, j| %>
+						<% if order && order.product%>
+							<tr>
+								<% p = order.product %>
+								<td><%= order.quantity %></td>
+								<td><%= p.menu_product.name%></td>
+								<td><%= colombian_currency(order.unit_price == 0 ? p.menu_product.product.price : order.unit_price)%></td>
+								<td><%= colombian_currency(order.quantity.to_i * (order.unit_price == 0 ? p.menu_product.product.price : order.unit_price))%></td>
+							</tr>
+							<% original = p.menu_product.product %>						
+							<% extras = p.additionals %>
+							<% extras.each do |e| %>
+								<% if e && e.additional %>
+									<% if e.additional.price.to_f > 0 %>
+										<tr>
+											<td><%= e.quantity %></td>
+											<td>Extra de <%= e.additional.menu_product.name %> </td>
+											<td><%= colombian_currency(e.unit_price==0 ? e.additional.price : e.unit_price)%></td>
+											<td><%= colombian_currency(e.quantity.to_i * (e.unit_price==0 ? e.additional.price : e.unit_price)) %></td>
+										</tr>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>			
+					<% end %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><b>Subtotal</b></td>
+						<td><%= colombian_currency(@bill.price)%></td>
+					</tr>
+					
+					<% discount = @bill.getDiscountValue %>
+					
+					<% if @bill.discount_voucher %>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><%="Dcto (#{@bill.discount_voucher.name})"%></td>
+							<td><%= colombian_currency(discount)  %></td>
+						</tr>
+					<% end %>	
+					<tr>
+						<td></td>
+						<td></td>
+						<td><b>Propina</b></td>
+						<td><%=colombian_currency(@bill.tip)%></td>
+					</tr>	
+					<tr>
+						<td></td>
+						<td></td>
+						<td><h3>TOTAL</h3></td>
+						<%total = @bill.getTotal%>
+						<td><%=colombian_currency(total) %></td>
+					</tr>			
+				</tbody>
+			</table>
+			
+			<h3>DISCRIMINACION DE IMPUESTOS</h3>
+			<table>
+				<tbody>
+					<tr>
+						<td><%= "BASE #{@setting.consumption_tax}%"%></td>
+						<td><%= colombian_currency(total - @bill.tax) %></td>
+						<td><%= "IMPC #{@setting.consumption_tax}%"%></td>
+						<td><%= colombian_currency(@bill.tax) %></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3>PAGOS</h3>
+			<table>
+				<tbody>
+					<tr>
+						<td><%= "ENTREGADO"%></td>
+						<td></td>
+						<td><%= t(@bill.payment_type.to_sym).upcase%></td>
+						<td><%= colombian_currency(total) %></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+			
+			<footer>
+				<p><%= @setting.tip_text %></p>
+				<p><%= @setting.billing_system_resolution %></p>
+				<p>RES. DIAN <%=@setting.billing_resolution%> FECHA <%=@setting.date%></p>
+				<p>RANGO DESDE <%="#{@setting.prefix} #{@setting.lower_range}"%> HASTA <%="#{@setting.prefix} #{@setting.upper_range}"%> </p>
+				MOS es un producto 4-sector. Para mayor informaci&oacute;n comun&iacute;quese al email contacto@4-sector.com
+			</footer>
+		</div>		
+	</body>
+</html>

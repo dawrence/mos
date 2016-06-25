@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyText
+  value: 1.5
+  receipt_number: MyString
+  user_id: 1
+
+two:
+  description: MyText
+  value: 1.5
+  receipt_number: MyString
+  user_id: 1

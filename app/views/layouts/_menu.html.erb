@@ -1,0 +1,57 @@
+<ul class="main-menu">
+  <li><%= link_to raw('<i class="icon-menu"></i>'), '#' %></li>
+	<% if allowed? :bills_edition %>
+		<li class="<%= 'active' if controller.controller_name == 'bills' %>"><%= link_to t(:bills), bills_path, class: "bills-menu" %></li>
+	<%end%>
+	<% if allowed? :tables_management %>
+		<li class="<%= 'active' if controller.controller_name == 'tables' %>"><%= link_to t(:tables), tables_path, class: "tables-menu" %></li>
+	<% end %>
+	<% if allowed? :kitchen_management %>
+		<li class="<%= 'active' if controller.controller_name == 'kitchens' %>"><%= link_to "Cocinas", kitchens_path, class: "kitchens-menu" %></li>
+	<%end%>
+	<% if allowed? :expenses_management %>
+		<li class="<%= 'active' if controller.controller_name == 'expenses' %>"><%= link_to "Gastos", expenses_path, class: "expenses-menu" %></li>
+	<% end %>
+	<%if allowed? :closing_stage_management%>
+		<li class="<%= 'active' if controller.controller_name == 'closing_stages' %>"><%= link_to "Cierres de Caja", closing_stages_path, class: "closing-stages-menu" %></li>
+	<% end %>
+	<% if allowed? :inventories_management%>
+		<li class="<%= 'active' if controller.controller_name == 'inventory_movements' %>"><%= link_to t(:inventory), inventory_movements_path, class: "inventory-menu" %></li>
+	<% end %>
+
+	<% if allowed? :users_management %>
+		<li class="<%= 'active' if controller.controller_name == 'users' && controller.action_name == 'index' %>"><%= link_to 'Usuarios', users_path, class: "users-menu" %></li>
+	<% end %>
+	<% if allowed? :settings_management%>
+		<li class="<%= 'active' if controller.controller_name == 'settings' %>"><%= link_to 'Configuración', edit_setting_path(id:1), class: "settings-menu" %></li>
+	<% end %>
+	<%if allowed? :discount_management %>
+		<li class="<%= 'active' if controller.controller_name == 'discount_vouchers' %>"><%= link_to t(:discount), discount_vouchers_path, class: "discount_vouchers-menu" %></li>
+	<% end %>
+	<% if allowed? :product_management %>
+		<li class="<%= 'active' if controller.controller_name == 'products' %>"><%= link_to t(:products), menu_products_path, class: "products-menu" %></li>
+		<li class="<%= 'active' if controller.controller_name == 'supplies' %>"><%= link_to t(:supplies), supplies_path, class: "supplies-menu" %></li>
+	<% end %>
+	<li class="<%= 'active' if controller.action_name == 'my_data' %>"><%= link_to "Mis Datos", my_data_path, class: "mydata-menu" %></li>
+
+</ul>
+<div class="actions">
+	<% if allowed? :view_kitchen %>
+  	<a data-dropdown="kitchens" aria-controls="kitchens" aria-expanded="false"><i class="icon-fullscreen icon-white"></i></a>
+  	<ul id="kitchens" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  		<%unless current_user.kitchens.empty?%>
+	    	<% current_user.kitchens.each do |k| %>
+	    	  <li>
+		          <%= link_to k.short_name, kitchen_path(id: k.id), target: "_blank", class:"medium-6 columns"%>
+		          <%= link_to raw('<i class="icon-eye-open icon-white"></i>'), control_kitchen_path(id: k.id), target:"_blank", class:"medium-6 columns"%>
+		        </li>
+	      	<% end %>
+      	<% end %>
+  	</ul>
+	<% end %>
+	<%= link_to raw('<i class="icon-off icon-white"></i>'), destroy_user_session_path, method: :delete %>
+</div>
+
+<div class="actions right">
+	<%= yield :controls %>
+</div>

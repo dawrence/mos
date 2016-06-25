@@ -1,0 +1,35 @@
+<div class="contents">
+  <h2 class="dark-gray"><%= t(:listing_discount_vouchers) %></h2>
+  <div class="content shown">
+    <div class="table shown">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th><%= t(:name) %></th>
+            <th><%= t(:type) %></th>
+            <th><%= t(:value) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @discount_vouchers.each do |discount_voucher| %>
+            <tr>
+              <td><%= discount_voucher.name %></td>
+              <td><%= t(:"tip_#{discount_voucher.discount_type}") %></td>
+              <td><%= discount_voucher.value %></td>
+              <td>
+                <%= link_to raw('<i class="icon-edit icon-white"></i>'), edit_discount_voucher_path(discount_voucher), class: 'icon-button green' %>
+                <%= link_to raw('<i class="icon-ban-circle icon-white"></i>'), discount_voucher, method: :delete, data: { confirm: t(:are_you_sure_?) }, class: 'icon-button red' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="tab-links">
+  <%= link_to raw("<i class='icon-plus'></i>Nuevo Dcto."),  new_discount_voucher_path %>
+</div>

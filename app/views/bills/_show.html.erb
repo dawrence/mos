@@ -1,0 +1,29 @@
+<div class="bill-summary">
+	<%= render "bills/bill_summary", b: @bill, i: 1, prices: true %>
+
+	<h6><%= "#{t(:user)}: #{@bill.user != nil ? @bill.user.email : t(:none)}" %></h6>
+	<p>
+		<b><%= t(:people_on_table)%></b>
+		<i><%= @bill.people_quantity %></i>
+	</p>
+	<p>
+		<b><%= t(:price)%></b>
+		<i> <%= colombian_currency @bill.price %></i>
+	</p>
+	<% if @bill.status == "paid" %>
+		<p>
+			<b>Propina</b> 
+			<i><%= colombian_currency  @bill.tip %></i>
+		</p>
+		<p>
+			<b>Descuento</b> 
+			<i> <%=colombian_currency  @bill.discount_value%></i>
+		</p>
+		<%if @bill.discount_voucher %>
+			<p>
+				<b>Concepto de Descuento</b> 
+				<i><%=@bill.discount_voucher.name%></i>
+			</p>
+		<% end %>
+	<% end %>
+</div>

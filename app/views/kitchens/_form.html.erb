@@ -1,0 +1,31 @@
+<%= form_for(@kitchen) do |f| %>
+  <% if @kitchen.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kitchen.errors.count, "error") %> <%= t(:prohibited_this_table_from_being_saved) %></h2>
+
+      <ul>
+      <% @kitchen.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field columns small-12 medium-4">
+    <%= f.label :name, "Nombre"%>
+    <%= f.text_field :name%>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label :short_name, "Nombre corto (identificador)"%>
+    <%= f.text_field :short_name, maxlength: 3%>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label :description, t(:description) %>
+    <%= f.text_field :description %>
+  </div>
+  
+  <div class="actions columns small-12">
+    <%= f.submit t(:save), disable_with: t(:saving), class: "button success"  %>
+  </div>
+  
+<% end %>

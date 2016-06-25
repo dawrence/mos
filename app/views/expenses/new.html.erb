@@ -1,0 +1,31 @@
+<% content_for :controls do %>
+  <%= link_to raw('<i class="icon-arrow-left icon-white"></i>'), expenses_path %>
+<% end %>
+
+<h2 class="dark-gray">Nuevo Gasto</h2>
+<div class="alert-box alert">Confirme varias veces los valores y referencias de los gastos digitados. <b>Una vez guardados estos no podrán ser editados.</b></div>
+
+
+<%= form_for(@expense) do |f| %>
+
+  <div class="field columns small-12 medium-6">
+    <%= f.label :receipt_number, "Número de Recibo/Factura" %>
+    <%= f.text_field :receipt_number, required: true %>
+  </div>
+  <div class="field columns small-12 medium-6">
+    <%= f.label :value, "Valor" %>
+    <%= f.number_field :value, required: true %>
+  </div>
+
+
+  <div class="field columns small-12 ">
+    <%= f.label :description, t(:description) %>
+    <%= f.text_area :description, required: true %>
+  </div>
+
+
+  <div class="actions columns small-12">
+    <%= f.submit t(:save), data_confirm: "¿Está seguro de que desea registrar este gasto?", disable_with: t(:saving), class: "button success"  %>
+  </div>
+  
+<% end %>

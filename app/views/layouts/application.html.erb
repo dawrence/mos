@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "MOS" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body class="<%= body_class %>">
+
+    <% if user_signed_in? %>
+      <header>
+        <%= render "layouts/menu" %>
+      </header>
+    <% end %>
+
+    <article>
+      <div class="inner">
+        <%= yield %>
+      </div>
+    </article>
+
+    <footer>
+      <span>Desarrollado y Distribuído por </span><%= link_to image_tag("logo.png"), 'http://4-sector.com', target: "_blank" %>
+    </footer>
+
+    <%= render "layouts/modal" %>
+  </body>
+</html>

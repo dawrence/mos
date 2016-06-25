@@ -1,0 +1,28 @@
+<% a = @tables.count%>
+<%= form_tag(cng_table_path, method:'put') do |f| %>
+  <%= hidden_field_tag 'bill_id', @bill.id%>
+	<table>
+		<thead>
+			<th><%= t(:table_name)  %></th>
+			<th><%= t(:description) %></th>
+			<th><%= t(:table_type)  %></th>
+		</thead>
+		<tbody>
+			<% @tables.each do |t|%>
+				<tr>
+						<td>
+							<%= radio_button_tag "table_id", t.id, t.id == @bill.table.id ? true : false%>
+							<span><%= t.name %></span>
+						</td>
+						<td>
+							<%= label_tag t.description %>
+						</td>
+						<td>
+							<%= t.auxiliar ? 'Auxiliar': 'Normal' %>
+						</td>
+				</tr>
+			<% end %> 
+		</tbody>
+	</table>
+	<%= submit_tag t(:accept)%>
+<% end %>

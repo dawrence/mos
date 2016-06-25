@@ -1,0 +1,7 @@
+<div class="bill">
+	<%= form_tag(bill_path(@bill.id), method:'delete',remote:true ) do |f| %>
+		<%= hidden_field_tag "id", @bill.id %> 
+		<%= text_area_tag :note, "",  required: true,  rows: "2", cols: "15", placeholder: "Motivo de anulación?", class: "bill-note" %>
+		<%= submit_tag t(:accept) %>
+	<% end %>
+</div>

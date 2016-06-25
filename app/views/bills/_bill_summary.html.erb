@@ -1,0 +1,68 @@
+<% prices ||= false %>
+<% scope = "all" %>
+<h5>
+	<span><%= b.table.description if b.table %></span>
+	<span><%= l b.created_at.in_time_zone('America/Bogota'), format: :short %></span>
+</h5>
+<span>Tiempo de preparación: </span>
+<hr>
+<table class="product">
+	<thead>
+		<tr>
+			<th>Producto</th> 
+			<th>Cant.</th>
+			<% if prices %>
+				<th>Precio</th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% b.orders.each_with_index do |order, j| %>
+			<% if order.product && (defined?(kitchen_id) ? order.product.has_kitchen?(kitchen_id) : true)%>
+				<tr class="<%=order.prepared? ? 'line-through' : '' %>">
+					<td>
+						<% p = order.product %>
+						<%= raw "#{p.menu_product.name}"%>
+						<% extras = p.additionals %>
+						<% unless p.original %>
+							<% original = p.get_original_product %>
+							<% others = return_deleted_ingredients(original,p)%>
+							<% unless others.empty? %>
+								<ul class="ingredient">					
+									<% others.each_with_index do |o, k| %>
+										<li>
+											Sin <%= o.supply.name %>
+										</li>
+									<% end %>
+								</ul>
+							<% end %>
+						<% end %>
+						<% unless extras.empty? %>
+							<ul class="add">
+								<% extra_price = 0 %>
+								<% extras.each do |e| %>
+									<li>
+										Extra de <%= e.additional.menu_product.name %> <span>x<%= e.quantity %></span>
+										<% extra_price += e.quantity.to_i*(e.unit_price==0 ? e.additional.price : e.unit_price) %>
+									</li>
+								<% end %>						
+							</ul>
+						<% end %>
+					</td>
+					<td>
+						x<%=order.quantity %>
+					</td>
+					<% if prices %>
+						<td>
+							<%= colombian_currency(order.quantity.to_i * (order.unit_price == 0 ? p.menu_product.product.price : order.unit_price) + extra_price.to_f) %>
+						</td>
+					<% end %>
+				</tr>		
+			<% end %>
+		</tbody>
+	<% end %>
+</table>
+<hr>
+<% unless b.note.empty? %>
+	<span class="notes"><%= b.note %></span>
+<% end %>

@@ -1,0 +1,84 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field columns small-12 medium-4">
+    <%= f.label "NIT" %>
+    <%= f.text_field :nit %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Razon social" %>
+    <%= f.text_field :business_name %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Direccion del local" %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Ciudad del local" %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Telefono de compañia y/o local" %>
+    <%= f.text_field :telephone %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "E mail de empresa" %>
+    <%= f.text_field :mail %>
+  </div>
+
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Prefijo de facturacion" %>
+    <%= f.text_field :prefix %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Rango de facturacion inferior" %>
+    <%= f.number_field :lower_range %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Rango de facturacion superior" %>
+    <%= f.number_field :upper_range %>
+  </div>
+
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Impuesto al consumo (IMPC)" %>
+    <%= f.number_field :consumption_tax %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Regimen"%>
+    <%= f.text_field :billing_system_resolution %>
+  </div>
+  <div class="field columns small-12 medium-4">
+    <%= f.label "Resolucion" %>
+    <%= f.text_field :billing_resolution %>
+  </div>
+
+  <div class="field columns small-12 medium-6">
+    <%= f.label "Fecha de resolucion" %>
+    <%= f.text_field :date %>
+  </div>
+  <div class="field columns small-12 medium-6">
+    <%= f.label "Hora de corte de facturacion"%>
+    <%= f.text_field :cutoff_date, value: @setting.cutoff_date.strftime("%H:%M"), type: 'time'%>
+  </div>
+
+  <div class="field columns small-12">
+    <%= f.label "Texto de propina" %>
+    <%= f.text_area :tip_text %>
+  </div>
+
+  <div class="actions columns small-12">
+    <%= f.submit t(:save), disable_with: t(:saving), class: "button success"  %>
+  </div>
+
+<% end %>

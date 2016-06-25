@@ -1,0 +1,41 @@
+<div class="contents">
+  <h2 class="dark-gray">Cierres de caja registrados</h2>
+  <%=render partial: "closing_stages/filter" %>
+  <div class="content shown">
+    <%= paginate @closing_stages, params: params%>
+    <div class="table shown">
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+          	<th>Cierre de caja No.</th>
+            <th>Fecha</th>
+            <th>Caja Inicial</th>
+            <th>Ventas Sistema</th>
+            <th>Gastos Sistema</th>
+            <th>Propinas Sistema</th>
+            <th>Descuentos Sistema</th>
+            <th>Caja Final Sistema</th>
+            <th>Caja Final Física</th>
+            <th>Diferencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @closing_stages.each do |cs| %>
+            <tr>
+              <td>#<%= cs.id %></td>
+              <td><%= cs.created_at.strftime("%d/%m/%Y") %></td>
+              <td><%= colombian_currency cs.initial_cash.to_f %></td>
+              <td><%= colombian_currency cs.system_sales.to_f %></td>
+              <td><%= colombian_currency cs.system_expenses.to_f %></td>
+              <td><%= colombian_currency cs.tips_total.to_f %></td>
+              <td><%= colombian_currency cs.total_discount.to_f %></td>
+              <td><%= colombian_currency (cs.initial_cash + cs.system_sales - cs.system_expenses) %></td>
+              <td><%= colombian_currency cs.physical_total %></td>
+              <td><%= colombian_currency (cs.physical_total - (cs.initial_cash + cs.system_sales - cs.system_expenses)) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

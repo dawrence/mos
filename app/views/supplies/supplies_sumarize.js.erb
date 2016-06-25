@@ -1,0 +1,10 @@
+
+var supplies_overview = $('#supplies_overview');
+var supplies_overview_body = supplies_overview.find(".supplies_overview_body");
+<% if @vld%>
+  supplies_overview_body.empty();
+  supplies_overview_body.html('<%= j render "supplies" %>');
+<% end %>
+  alert('<%= show_alert(@notice) %>');
+	bills_report_view.find(".supplies_report_submit").show();
+  bills_report_view.find(".wait-header").hide();

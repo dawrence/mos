@@ -1,0 +1,16 @@
+<% if @inv_by_spl.empty? %>
+	alert('<%= show_alert(@notice) %>');
+
+<% else %>
+	console.log("<%=Time.now%>");
+	<% if !params[:page] %>
+		modal.find('.modal-body').html('<%= j render "inventory_detail" %>');
+		modal.foundation('reveal', 'open');
+		$('.fdatepicker').fdatepicker({
+	      language: 'es'
+		});
+	<% else %>
+		modal.find('.inventory-list').html('<%= j render "inventory_list" %>');
+	<% end %>
+<% end %>
+

@@ -1,0 +1,8 @@
+<% content_for :controls do %>
+	<%= link_to raw('<i class="icon-arrow-left icon-white"></i>'), supplies_path, class: 'action_button back_button btn btn-inverse btn-rounded' %>
+<% end %>
+
+<h2 class="dark-gray"><%= t(:new_supply) %></h2>
+<i><%= "#{t(:supply_category)}: #{@supply.supply_category.name}" %></i>
+
+<%= render 'form' %>

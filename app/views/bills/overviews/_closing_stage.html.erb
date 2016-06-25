@@ -1,0 +1,37 @@
+<div class="table" id ="closing_stage">
+  <dl>
+  	<dt>Gastos Reportados</dt>
+  	<dd>(<%= colombian_currency Expense.uncounted.each.sum(&:value) %>)</dd>
+    <% unless ClosingStage.today_yet?%>
+    	<dt>Ventas del Sistema Sin Propinas </dt>
+    	<dd><%= colombian_currency Bill.get_current_paid.sum(&:price) %></dd>
+    <% end %>
+    <dt>Propinas del Sistema</dt>
+    <dd><%= colombian_currency Bill.get_current_paid.sum(&:tip) %></dd>
+    <dt>Descuentos</dt>
+    <dd>( <%= colombian_currency Bill.get_current_paid.sum(&:discount_value)%> ) </dd>
+    <% if !ClosingStage.today_yet? %>
+        <dt>Total Ventas</dt>
+        <dd><%= colombian_currency Bill.get_current_paid.sum(&:total) %></dd>
+      	<dt>Total Ventas - Gastos</dt>
+      	<dd><%= colombian_currency(Bill.get_current_paid.sum(&:total) - Expense.uncounted.each.sum(&:value)) %></dd>
+    <% end %>
+  </dl>
+  <% if ClosingStage.today_yet? %>
+	  <div class="alert-box alert">Confirme varias veces los valores digitados. <b>Una vez guardados estos no podrán ser editados.</b></div>
+
+	  <%= form_for ClosingStage.new do |f| %>
+	  	<div class="row">
+	  		<div class="columns small-6">
+	  			<%= f.label :initial_cash, "Caja inicial" %>
+	  			<%= f.text_field :initial_cash, required: true%>
+	  		</div>
+	  		<div class="columns small-6">
+	  			<%= f.label :physical_total, "Caja Final" %>
+	  			<%= f.text_field :physical_total, required: true  %>
+	  		</div>
+	  		<%= f.submit "Guardar Cierre de Caja", disable_with: "Guardando...", class: "button success" %>
+	  	</div>
+	  <% end %>
+	<% end %>
+</div>

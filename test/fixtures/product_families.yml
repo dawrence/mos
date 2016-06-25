@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+pf_1:
+  name: ProductFamily_1
+  description: MyText
+
+pf_2:
+  name: ProductFamily_2
+  description: MyText

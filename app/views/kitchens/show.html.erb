@@ -1,0 +1,4 @@
+<%= link_to "Reload", reload_kitchen_path(type: "view", id: params[:id]), remote: true, class: "reload_kitchen" %>
+<div class="kitchen_scope">
+	<%= render "kitchen", kitchen_id: params[:id] %>
+</div>

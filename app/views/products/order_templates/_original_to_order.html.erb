@@ -1,0 +1,32 @@
+<tr id= 'bill_product_<%= product.id %>' data-modifying='false' data-additional=false class='product_to_order'>
+  <td>
+    <span class='product_name'><%= product.menu_product.name %></span>
+    <ul class='product_custom_ing'></ul>
+  </td>
+	<td class='order_quantity'>
+    <%= hidden_field_tag('bill[orders_attributes][][quantity]', quantity) %>
+  </td>
+	<td>
+    <%= link_to(raw("<i class='icon-edit icon-white'></i>"), products_show_ingredients_path(id: product.menu_product_id), remote: true, class: 'action_button mod_btn btn btn-inverse btn-rounded blue') if product.menu_product.modificable %>
+  </td>
+  <td>
+    <%= link_to(raw("<i class='icon-plus icon-white'></i>") , '#', class: 'action_button additional_btn btn btn-inverse btn-rounded green') if product.menu_product.additional %>
+  </td>
+	<td>
+    <%= link_to_function(raw('<i class="icon-ban-circle icon-white"></i>'), "rmv_bil_prd(this,#{product.id},#{product.price})", class: 'action_button btn btn-inverse btn-rounded red') %>
+  </td>
+  <td class='product_attributes'>
+    <%= hidden_field_tag('bill[orders_attributes][][product_attributes][menu_product_id]',product.menu_product_id)%>
+    <%= hidden_field_tag('bill[orders_attributes][][product_attributes][original]',false) %>
+    <%= hidden_field_tag('bill[orders_attributes][][product_attributes][price]', product.price) %>
+  </td>
+  <td class='additionals_attributes'>
+    <table class='additionals'>
+      <tbody>
+      </tbody>
+    </table>
+  </td>
+  <td class='ingredients_attributes'></td>
+	<%= hidden_field_tag('bill[orders_attributes][][product_id]', product.id) %>
+	<%= hidden_field_tag('bill[orders_attributes][][ship]', false) %>
+</tr>

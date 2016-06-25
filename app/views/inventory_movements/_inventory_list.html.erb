@@ -1,0 +1,25 @@
+<%= paginate @inv_by_spl, params: params, remote:true%>
+<table class="table table-hover table-bordered" border="0" style="width:100%">
+  <thead>
+    <tr>
+      <th><%= t(:date) %></th>
+      <th><%= t(:movement_type) %></th>
+      <th><%= t(:quantity) %></th>
+      <th><%= t(:description) %></th>
+      <th><%= t(:adjustment) %></th>
+      <th><%= "Usuario" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inv_by_spl.each do |im| %>
+      <tr class="inventory-movement-<%= im.adjustment ? 'adjustment' : 'normal' %>">
+        <td><%= im.created_at %></td>
+        <td><%= im.movement_type %></td>
+        <td><%= im.quantity %></td>
+        <td><%= im.description %></td>
+        <td><%= im.adjustment ? 'Si' : 'No'%>
+        <td><%= im.user ? im.user.email : "N/A" %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

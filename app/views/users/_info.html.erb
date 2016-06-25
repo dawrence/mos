@@ -1,0 +1,19 @@
+<div class="field columns small-12 medium-6">
+  <%= f.label :name, "Nombre Completo" %>
+  <%= f.text_field :name, required: true %>
+</div>
+
+<div class="field columns small-12 medium-6">
+  <%= f.label :email, "Email" %>
+  <%= f.email_field :email, required: true %>
+</div>
+
+<div class="field columns small-12 medium-6">
+  <%= f.label :id_number, "Número de Identificación" %>
+  <%= f.text_field :id_number, required: true %>
+</div>
+
+<div class="field columns small-12 medium-6">
+  <%= f.label :role, "Número de Identificación" %>
+  <%= f.select :role, options_for_select([["Cajero", 1], ["Mesero", 2]], @user.role), required: true %>
+</div>

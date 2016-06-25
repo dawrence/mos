@@ -1,0 +1,47 @@
+<div class="row">
+  <%= form_tag(inv_det_spl_path, remote:true, method:'get') do |brv|%>
+    <%= hidden_field_tag "id", params[:id] %>
+    <%= hidden_field_tag "page", 1 %>
+    <div class="row">
+      <div class="medium-6 small-12 columns">
+        <%= label_tag "Fecha inicial"%>
+        <%= text_field_tag "init_date", params[:init_date] ? params[:init_date] : "", placeholder: t(:init_date), class: 'fdatepicker' %>
+      </div>
+      <div class="medium-6 columns small-12">
+        <%= label_tag "Fecha final" %>
+        <%= text_field_tag "end_date", params[:end_date] ? params[:end_date] : "", placeholder: t(:end_date), class: 'fdatepicker' %>
+      </div>
+    </div>
+    <div class="row row-c">
+      <fieldset class="medium-4 small-12 columns fields">
+        <legend>Tipo de movimiento</legend>
+          <%= check_box_tag 'movement_type[]', 'out',
+              params[:movement_type] && params[:movement_type].include?("out") ? true : false ,
+              id: "movement_type__out"  %>
+          <%= label_tag "movement_type[][out]", 'Salida' %>
+          <%= check_box_tag 'movement_type[]', 'in',
+              params[:movement_type] && params[:movement_type].include?("in") ? true : false,
+              id: "movement_type__in"  %>
+          <%= label_tag "movement_type[][in]", 'Entrada' %>
+      </fieldset>
+      
+      <fieldset class="medium-4 small-12 columns fields">
+        <legend>Ajuste</legend>
+          <%= check_box_tag 'adjustment', 'true',
+              params[:adjustment] && params[:adjustment]== 'true' ? true : false ,
+              id: "adjustment"  %>
+          <%= label_tag "adjustment", 'Si' %>
+      </fieldset>
+      <fieldset class="medium-4 small-12 columns fields">
+        <legend>Usuario</legend>
+          <%= select_tag :user_id,options_for_select(User.all.map{|u| [u.email, u.id]} << ["todos", -1], params[:user_id] ? params[:user_id] : -1)%>
+      </fieldset>
+    </div>
+    
+
+    <%= submit_tag "Buscar", class: 'button', data: {disable_with: "..."} %>
+  <% end %>
+  <div class="inventory-list">
+    <%=render partial: "inventory_list" %>
+  </div>
+</div>

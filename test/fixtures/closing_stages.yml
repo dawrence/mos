@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  system_sales: 1.5
+  system_expenses: 1.5
+  initial_cash: 1.5
+  physical_total: 1.5
+
+two:
+  system_sales: 1.5
+  system_expenses: 1.5
+  initial_cash: 1.5
+  physical_total: 1.5

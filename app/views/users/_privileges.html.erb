@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="columns small-12 medium-12">
+    <h3> Modulos </h3>
+    <% @privileges[:modules].each do |p|%>
+      <div class="field medium-4 columns">
+        <%= check_box_tag "[privileges_attributes][][role_id]", p.id, @user ? @user.has_role(p.identifier) : false %>
+        <%= label_tag p.name %>
+      </div>
+    <% end %>
+  </div>
+  <div class="columns small-12 medium-12">
+    <h3> Acciones </h3>
+    <% @privileges[:actions].each do |p|%>
+      <div class="field medium-4 columns">
+        <%= check_box_tag "[privileges_attributes][][role_id]", p.id, @user ? @user.has_role(p.identifier) : false%>
+        <%= label_tag p.name %>
+      </div>
+    <% end %>
+  </div>
+  <div class="columns small-12 medium-12">
+    <h3> Reportes </h3>
+    <% @privileges[:reports].each do |p|%>
+      <div class="field medium-4 columns">
+        <%= check_box_tag "[privileges_attributes][][role_id]", p.id, @user ? @user.has_role(p.identifier) : false %>
+        <%= label_tag p.name %>
+      </div>
+    <% end %>
+  </div>
+</div>

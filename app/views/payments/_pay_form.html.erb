@@ -1,0 +1,68 @@
+<div class="bill">
+	<%= form_tag(pay_bill_path, method: :put, remote: true ) do |f| %>
+	<%= hidden_field_tag "id", @bill.id %> 
+	<div class="row">
+	    
+  	<div class="columns small-12 medium-6 large-3">
+      <%= label_tag :client_name, "Nombre del cliente:" %>
+      <%= text_field_tag :client_name, "", placeholder:"Nombre de cliente" %>
+    </div>
+
+  	<div class="columns small-12 medium-6 large-3">
+      <%= label_tag :client_address, "Dirección" %>
+      <%= text_field_tag :client_address, "", placeholder:"Dirección" %>
+    </div>
+  	<div class="columns small-12 medium-6 large-3">
+      <%= label_tag :client_phone, "Teléfono" %>
+      <%= text_field_tag :client_phone, "", placeholder:"Teléfono" %>
+    </div>
+
+  	<div class="columns small-12 medium-6 large-3">
+	    <%= label_tag :client_email, "Email" %>
+	    <%= text_field_tag :client_email, "", placeholder:"Email" %>
+    </div>
+
+
+    <div class="columns small-12 medium-4">
+      <%= label_tag :payment_type, t(:payment_type) %>
+      <%= select_tag :payment_type, options_for_select([[t(:cash), "cash"], [t(:card), "card"],[t(:cortesy), "cortesy"],[t(:devolution), "devolution"]]), required: true %>
+    </div>
+    <div class="columns small-12 medium-4">
+      <%= label_tag :tip_type, t(:tip_type) %>
+      <%= select_tag :tip_type, options_for_select([[t(:tip_val), "val"], [t(:tip_per), "per"]]) %>
+    </div>
+
+    <div class="columns small-12 medium-4">
+    	<%= label_tag :tip, "Valor Propina" %>
+      <%= number_field_tag :tip, "", placeholder: "Propina (Opcional) " %>
+    </div>
+	</div>
+
+	<div class="small-12 columns pick-discount">
+
+		<%= radio_button_tag :discount, -1, true%>
+		<%= label_tag "discount_-1" do %>
+			<span><%= t(:no_discount) %></span>
+			<span>N/A</span>
+		<% end %>
+
+		<% @discounts.each_with_index do |d,i| %>
+			<%= radio_button_tag :discount, d.id, false %>
+			<%= label_tag "discount_#{d.id}" do %>
+				<span><%= d.name %></span>
+				<span>
+					<% if d.discount_type == 'val' %>
+						<%= colombian_currency d.value %>
+                    <% elsif d.discount_type == 'var' %>
+                        <%= number_field_tag "discount_value",d.value ? d.value : 0, class: "dsc_var", data:{id: d.id} %>
+					<% else %>
+						<%= "% #{d.value}" %>
+					<% end %>
+				</span>
+			<% end %>
+		<% end %>
+	</div>
+	
+		<%= submit_tag t(:accept), class: "button success" %>
+	<% end %>
+</div>

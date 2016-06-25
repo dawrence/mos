@@ -1,0 +1,24 @@
+@import 'variables';
+
+form.new_menu_product,form.edit_menu_product{
+  position: static;
+  margin: 0;
+  padding: 0;
+  display: inline;
+	.product-submit{
+		position: fixed;
+		top: 0;
+		right: 3rem;
+		display: inline-block;
+  	height: 3rem;
+  	padding: 0.2rem 1rem;
+  	color: #27B4AE;
+  	line-height: 2.6rem;
+  	z-index: 2;
+  	background-color: transparent;
+  	&:hover{
+  		background-color: $green;
+  		color: white;
+  	}
+	}
+}

@@ -1,0 +1,11 @@
+<div id="kitchen_container">
+	<ul class="bills">
+		<% @bills.each_with_index do |b, i| %>
+			<% if b.has_orders?(kitchen_id) %>
+				<li class="bill-summary">
+					<%= render "bills/bill_summary", b: b, i: i, kitchen_id: kitchen_id, scope: "queue" %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>

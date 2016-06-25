@@ -1,0 +1,167 @@
+@import 'variables';
+
+body.kitchen{
+	display: none;
+	background-color: #404041;
+	.reload_kitchen{
+		display: none;
+	}
+}
+
+
+.bill-summary{
+  h5{
+    color: $green;
+    text-align: center;
+    padding: 0px;
+    margin: 3px 0px 0px 0px;
+    font-family: Arial;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    span:first-child{
+      margin-right: 0.5rem;
+    }
+    span:last-child{
+      font-size: 1.3rem;
+    }
+    +span{
+      display: block;
+      font-size: 0.9rem;
+      color: $gray;
+      text-align: center;
+    }
+  }
+  hr{
+    border-color: #D8D9DB;
+    margin: 0.5rem 0;
+    margin-bottom: 0;
+  }
+  span.notes{
+    margin: 0.5rem 0;
+    color: $green;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    display: block;
+    padding: 0 1rem;
+  }
+  >ul, >a>ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    ul{
+      font-weight: 200;
+      font-size: 1.2rem;
+    }
+  }
+  table.product{
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 0;
+    +hr{
+      margin-top: 0;
+    }
+    thead{
+      th{
+        border-bottom: 1px solid #D8D9DB;
+        text-align: center;
+        color: $green;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        line-height: 1.8rem;
+      }
+    }
+    tbody{
+      tr{
+        td{
+          font-size: 1.2rem;
+          line-height: 1.5rem;
+        }
+        >td:last-child{
+          text-align: center;
+        }
+      }
+      tr:nth-child(even){
+        background-color: rgb(240,240,240);
+      }
+    }
+  }
+  ul.add{
+    color: $lime;
+    margin: 0 0 0.7rem 1.5rem;
+    li{
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+      text-indent: -0.7rem;
+      span{
+        color: $lime;
+      }
+    }
+  }
+  ul.ingredient{
+    color: red;
+    margin: 0 0 10px 30px;
+    li{
+      font-size: 23px;
+      line-height: 25px;
+    }
+  }
+}
+
+#kitchen_container{
+
+	ul.bills{
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+    
+		>li{
+			width: 220px;
+			font-weight: 500;
+			font-size: 30px;
+			float: left;
+			overflow: hidden;
+			background-color: white;
+      margin: 5px 0px;
+      border-radius: 0.5rem;
+		}
+		a{
+			text-decoration: none;
+		}
+	}
+  &.control{
+    li.bill{
+      &:hover{
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+
+.masonry,
+.masonry .masonry-brick {
+  -webkit-transition-duration: 0.7s;
+     -moz-transition-duration: 0.7s;
+      -ms-transition-duration: 0.7s;
+       -o-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+}
+
+.masonry {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+}

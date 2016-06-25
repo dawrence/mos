@@ -1,0 +1,14 @@
+<%= form_tag(closing_stages_path, method: 'get') do |brv|%>
+    <div class="row">
+      <div class="medium-6 small-12 columns">
+        <%= label_tag "Fecha inicial"%>
+        <%= text_field_tag "init_date", params[:init_date] ? params[:init_date] : "", placeholder: t(:init_date), class: 'fdatepicker' %>
+      </div>
+      <div class="medium-6 columns small-12">
+        <%= label_tag "Fecha final" %>
+        <%= text_field_tag "end_date", params[:end_date] ? params[:end_date] : "", placeholder: t(:end_date), class: 'fdatepicker' %>
+      </div>
+    </div>
+  
+    <%= submit_tag "Buscar", class: 'button', data: {disable_with: "..."} %>
+  <% end %>

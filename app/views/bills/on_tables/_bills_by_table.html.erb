@@ -1,0 +1,10 @@
+<% if tables.first%>
+    <%= select_tag :tables, options_for_select(tables.map{|table| [table.description.to_s.titleize, "table-#{table.id}"]}, tables.first.id) %>
+    <% tables.each_with_index do |t, i| %>
+      <div class="table <%= 'shown' if t == tables.first %>" id="table-<%= t.id %>">
+        <%= render "bills/overviews/bills_table", object: {bills:t.active_bills,show_date: false,show_summary: true,show_price_details: true, table: t}%>    
+      </div>
+      <%= link_to "REALIZAR PEDIDO", new_bill_path(:table_id => t.id), class: 'button new-bill bg-red' %>
+    <% end %>
+<% end %>
+

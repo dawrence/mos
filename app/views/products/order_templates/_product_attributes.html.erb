@@ -1,0 +1,9 @@
+<li class="white bg-blue" data-mp ='<%= product.menu_product_id %>' data-ingredient = '<%= i[:ingredient].id %>' data-quantity = '<%= i[:ingredient].quantity %>' > 
+	<span class='ingredient_name'>
+		<%= i[:ingredient].supply.name %>
+	</span>
+ 	<%= check_box_tag('ingredient',i[:ingredient].quantity, i[:selected], class: 'ingredient_to_add') %>
+ 	<%= hidden_field_tag('bill[orders_attributes][][product_attributes][ingredients_attributes][][quantity]' ,(i[:selected]? i[:ingredient].quantity : 0), class: 'ingredient_quantity') %>
+ 	<%= hidden_field_tag('bill[orders_attributes][][product_attributes][ingredients_attributes][][supply_id]',i[:ingredient].supply_id) %>
+ 	<%= hidden_field_tag('bill[orders_attributes][][product_attributes][ingredients_attributes][][quantifiable]',i[:ingredient].quantifiable) %>
+</li>

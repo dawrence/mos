@@ -1,0 +1,19 @@
+<div class="table" id ="bills_paid_overview">
+<div>
+    <table style="">
+        <thead>
+            <th>Total Vendido:</th>
+            <th>Total Propinas:</th>
+            <th>Total descuentos:</th>
+            <th>Total Pagado:</th>
+        </thead>
+        <tbody>
+            <td class="bills_report_total"><%= colombian_currency @bills_paid.sum(&:price) %> </td>
+            <td class="bills_report_tip"><%=colombian_currency  @bills_paid.sum(&:tip)%></td>
+            <td class="bills_report_discount">(<%= colombian_currency @bills_paid.sum(&:discount_value)%>)</td>
+            <td class="bills_report_total"><%=colombian_currency  @bills_paid.sum(&:total) %> </td>
+        </tbody>
+    </table>
+</div>
+<%= render "bills/overviews/bills_table", object: {bills:@bills_paid,show_date: true,show_price_details: true}%>
+</div>

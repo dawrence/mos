@@ -1,0 +1,148 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+#  p_1
+i_1:
+  supply: s_1
+  product: p_1
+  quantity: 1.5
+
+# p_2
+i_:
+  supply: s_1
+  product: p_2
+  quantity: 1.5
+
+i_3:
+  supply: s_2
+  product: p_2
+  quantity: 1.5
+
+i_4:
+  supply: s_3
+  product: p_2
+  quantity: 1.5
+
+#p_3
+i_5:
+  supply: s_1
+  product: p_3
+  quantity: 1.5
+
+i_6:
+  supply: s_3
+  product: p_3
+  quantity: 1.5
+
+i_7:
+  supply: s_4
+  product: p_3
+  quantity: 1.5
+# p_6
+i_8:
+  supply: s_1
+  product: p_6
+  quantity: 1.5
+
+i_9:
+  supply: s_2
+  product: p_6
+  quantity: 1.5
+
+i_10:
+  supply: s_3
+  product: p_6
+  quantity: 1.5
+# p_7
+i_11:
+  supply: s_1
+  product: p_7
+  quantity: 1.5
+
+i_12:
+  supply: s_2
+  product: p_7
+  quantity: 1.5
+
+i_13:
+  supply: s_3
+  product: p_7
+  quantity: 1.5
+# p_8
+i_14:
+  supply: s_1
+  product: p_8
+  quantity: 1.5
+
+i_15:
+  supply: s_2
+  product: p_8
+  quantity: 1.5
+
+i_16:
+  supply: s_4
+  product: p_8
+  quantity: 1.5
+# p_9
+i_17:
+  supply: s_1
+  product: p_9
+  quantity: 1.5
+
+i_18:
+  supply: s_2
+  product: p_9
+  quantity: 1.5
+
+i_19:
+  supply: s_3
+  product: p_9
+  quantity: 15
+# p_10
+i_14:
+  supply: s_1
+  product: p_10
+  quantity: 1.5
+
+i_15:
+  supply: s_2
+  product: p_10
+  quantity: 1.5
+
+i_16:
+  supply: s_3
+  product: p_10
+  quantity: 1.5
+
+i_17:
+  supply: s_4
+  product: p_10
+  quantity: 1.5
+# p_11
+i_18:
+  supply: s_1
+  product: p_11
+  quantity: 1.5
+
+i_19:
+  supply: s_2
+  product: p_11
+  quantity: 1.5
+
+i_20:
+  supply: s_3
+  product: p_11
+  quantity: 1.5
+# p_12
+i_21:
+  supply: s_1
+  product: p_12
+  quantity: 1.5
+
+i_22:
+  supply: s_2
+  product: p_12
+  quantity: 1.5
+
+i_23:
+  supply: s_3
+  product: p_12
+  quantity: 1.5

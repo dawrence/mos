@@ -1,0 +1,39 @@
+<div class="contents">
+  <div class="content shown">
+  	<%= select_tag :tables, options_for_select(@product_families.map{|pf| [pf.name.to_s.titleize, "table-#{pf.id}"]}, @product_families.first.id) %>
+
+		<% @product_families.each_with_index do |pf, i| %>
+			<div class="table <%= 'shown' if i == 0 %> item" id="table-<%= pf.id %>">
+				<table class="table table-striped table-hover">
+				  <thead>
+				    <tr>
+				      <th><%= t(:menu_product_name) %></th>
+				      <th><%= t(:menu_product_price) %></th>
+				      <th><%= t(:inventoried) %></th>
+				      <th></th>
+				      <th></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+
+				    <% pf.menu_products.each do |mp| %>
+				      <tr>
+				        <td><%= mp.name %></td>
+				        <td><%= colombian_currency(mp.product.price) %></td>
+				        <td>
+							<% unless mp.product.quantifiable_ingredients.empty? %>
+								<i class="icon-ok icon-button green"></i>
+							<% end %>
+						</td>
+				        <td><%= link_to raw('<i class="icon-edit icon-white"></i>'), edit_menu_product_path(mp), class: 'icon-button green' %></td>
+						<td><%= link_to raw('<i class="icon-ban-circle icon-white"></i>'), menu_product_path(mp), method: :delete, data: { confirm: t(:are_you_sure_?) }, class: 'icon-button red' %></td>
+				      </tr>
+				    <% end %>
+
+				  </tbody>
+				</table>
+				<%= link_to "Agregar Producto", new_menu_product_path(:pf_id => pf.id), class: 'new-element button bg-blue' %>
+			</div>
+		<% end %>
+	</div>
+</div>

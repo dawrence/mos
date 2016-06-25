@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t(:name)+':' %></b>
+  <%= @supply.name %>
+</p>
+
+<p>
+  <b><%= t(:supply_category)+':' %></b>
+  <%= @supply.supply_category_id %>
+</p>
+
+
+<%= link_to image_tag('edit.png'), edit_supply_path(@supply), class: 'action_button' %> |
+<%= link_to image_tag('back.png'), supplies_path, class: 'action_button' %>

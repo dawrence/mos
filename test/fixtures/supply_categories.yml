@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+sc_1:
+  name: SupplyCategoryOne
+  image: hello
+
+sc_2:
+  name: SupplyCategoryTwo
+  image: hello
+
+sc_3:
+  name: SupplyCategoryThree
+  image: hello

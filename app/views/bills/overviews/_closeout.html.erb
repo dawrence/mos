@@ -1,0 +1,13 @@
+<% @products.each do |p|%>
+      <tr>
+        <td>
+          <%= p.product_name %>
+        </td>
+        <td>
+          <%= p.cnt%>
+        </td>
+        <td>
+          <%= colombian_currency(p.unit_price == 0 ? p.product_price : p.unit_price) %>
+        </td>
+      </tr>
+<% end %>

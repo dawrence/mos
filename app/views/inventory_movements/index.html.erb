@@ -1,0 +1,45 @@
+<%= form_tag(inventory_movements_massive_path, remote:true, method:'post', class: "ghost") do |i|%>
+  <div class="contents">
+    <div class="content shown">
+      <%= select_tag :tables, options_for_select(@supply_categories.map{|sc| [sc.name.to_s.titleize, "table-#{sc.id}"]}, @supply_categories.first.id) %>
+    	<% @supply_categories.each_with_index do |sc, i| %>
+    		<div class="table <%= 'shown' if i == 0 %>" id="table-<%= sc.id %>">
+  				<table class="table table-striped table-hover table-bordered"> 
+  					<thead>
+  						<tr>
+                <th>Selec.</th>
+  							<th><%= t(:menu_supply_name)%></th>
+  							<th><%= t(:availability)%></th>
+  							<th><%= t(:inventory_details)%></th>
+  							<th><%= t(:new) %></th>
+                <th>Tipo de Movimiento</th>
+                <th>Cantidad</th>
+                <th><%= t(:adjustment)%> </th>
+  						</tr>
+  					</thead>
+  					<tbody>
+							<% sc.supplies.each do |s| %>
+								<tr>
+                  <td><%= check_box_tag 'supplies[]', s.id , false,  class: "m-i-checkbox"%></td>
+									<td><%= s.name.titleize %></td>
+									<td><%= s.inventory ? s.inventory.supply_availability : 0 %></td>
+									<td><%= link_to raw('<i class="icon-eye-open icon-white"></i>'), inv_det_spl_path(id: s.id), remote: true, cache: false, method: :get , class: 'action_button btn btn-inverse btn-rounded icon-button blue' %></td>
+									<td><%= link_to raw('<i class="icon-plus icon-white"></i>'), new_inventory_movement_path(id: s.id), remote: true, method: :get , class: 'action_button btn btn-inverse btn-rounded icon-button green' %></td>
+                  <td><%= select_tag "type[#{s.id}][]", options_for_select([[t(:incoming), "in"], [t(:outgoing), "out"]]), class:"m-i-type",disabled: true, data:{ id: s.id}%></td>
+                  <td><%= number_field_tag "quantity[#{s.id}][]", 0, min: 0, disabled: true, class:"m-i-quantity", data:{ id: s.id}%></td>
+                  <td><%= check_box_tag "adjustment[#{s.id}][]", true, false, disabled: true, class:"m-i-adjustment",data:{ id: s.id}%></td>
+								</tr>
+							<% end %>
+  					</tbody>
+  				</table>        
+  			</div>
+    	<% end %>
+    </div>
+  </div>
+  <%= submit_tag t(:accept) %>
+<% end %>
+
+
+<div class="tab-links">
+  <%= link_to raw("<i class='icon-savetodrive'></i>Guardar"), '#', class: "ghost-submit" %>
+</div>

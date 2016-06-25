@@ -1,0 +1,13 @@
+<% if @vld %>
+  if(confirm('<%= t(:print_receipt)%>')){
+  	$(window.location.replace('<%= bills_url %>'));
+  	window.open('<%= print_bill_url(id:@bill.id)%>');
+	  alert('<%= show_alert(@notice) %>');
+  }
+  else{
+  	$(window.location.replace('<%= bills_url %>'));
+	  alert('<%= show_alert(@notice) %>'); 
+  }
+<% else %>
+	alert('<%= show_alert(@notice) %>');
+<% end %>

@@ -1,0 +1,31 @@
+@import 'variables';
+
+div.pick-discount{
+	text-align: center;
+	input[type="radio"]{
+		display: none;
+	}
+	label{
+		margin: 0;
+		width: 12rem;
+		height: 4.5rem;
+		overflow: hidden;
+		display: inline-block;
+		padding: 1rem;
+		border: 1px solid $dark_green;
+		margin-bottom: 0.3rem;
+		span{
+			display: block;
+			font-weight: 600;
+			text-align: center;
+		}
+	}
+	input[type="radio"]:checked{
+		+label{
+			background-color: $green;
+			span{
+				color: white;
+			}
+		}
+	}
+}
