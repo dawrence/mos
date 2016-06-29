@@ -83,8 +83,10 @@ class InventoryMovementsController < ApplicationController
 
   def details_by_supply
     @supply = Supply.find(params[:id])
-    init_date = params[:init_date] && !params[:init_date].empty? ? DateTime.strptime(params[:init_date], "%m/%d/%Y") : nil
-    end_date  = params[:end_date] && !params[:end_date].empty? ?  DateTime.strptime(params[:end_date], "%m/%d/%Y") : nil
+    setting=Setting.getSetting()
+    cutoff_hour = setting.cutoff_date.hour
+    init_date = DateTime.strptime(params[:init_date], "%m/%d/%Y").change(hour: cutoff_hour, min: 0, sec:0)
+    end_date  = DateTime.strptime(params[:end_date], "%m/%d/%Y").change(hour: cutoff_hour, min: 0, sec:0)
     params.delete(:user_id) if params[:user_id].to_i == -1
     params[:updated_at] = init_date...end_date if init_date && end_date
     @inv_by_spl = @supply.inventory_movements
@@ -94,6 +96,11 @@ class InventoryMovementsController < ApplicationController
     respond_to do |format|
       format.js
     end
+    rescue Exception
+      @notice = "No se seleccionaron fechas"
+      respond_to do |format|
+        format.js
+      end
   end
 
   def massive_insert
