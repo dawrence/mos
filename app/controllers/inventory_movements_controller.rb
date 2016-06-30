@@ -85,8 +85,8 @@ class InventoryMovementsController < ApplicationController
     @supply = Supply.find(params[:id])
     setting=Setting.getSetting()
     cutoff_hour = setting.cutoff_date.hour
-    init_date = DateTime.strptime(params[:init_date], "%m/%d/%Y").change(hour: cutoff_hour, min: 0, sec:0)
-    end_date  = DateTime.strptime(params[:end_date], "%m/%d/%Y").change(hour: cutoff_hour, min: 0, sec:0)
+    init_date = params[:init_date].present? ? DateTime.strptime(params[:init_date], "%m/%d/%Y").change(hour: cutoff_hour, min: 0, sec:0) : nil
+    end_date  = params[:end_date].present? ? DateTime.strptime(params[:end_date], "%m/%d/%Y").change(hour: cutoff_hour, min: 0, sec:0) : nil
     params.delete(:user_id) if params[:user_id].to_i == -1
     params[:updated_at] = init_date...end_date if init_date && end_date
     @inv_by_spl = @supply.inventory_movements
