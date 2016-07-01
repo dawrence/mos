@@ -23,8 +23,15 @@ class Bill < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       b = Bill.new(to_hash.merge!("people_quantity" => 0))
       params.each do |d|
-        order = Order.find(d)
-        b.orders << order if order
+        order = Order.find_by_id(d[:id])
+        if order
+          quantity = order.quantity.to_i - d[:quantity].to_i
+          unless quantity == 0
+            order.update_attributes(quantity: quantity)
+            order = Order.new(bill_id: order.id,quantity: d[:quantity].to_i,product_id: order.product_id,unit_price: order.unit_price,status: order.status) 
+          end
+          b.orders << order
+        end
       end
       b.save!
       b.check_prepared_orders

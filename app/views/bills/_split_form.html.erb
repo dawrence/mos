@@ -11,6 +11,7 @@
 				<tr>
 					<th>Producto</th> 
 					<th>Precio</th>
+					<th>Cantidad</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -52,8 +53,8 @@
 							<td>
 								<%= colombian_currency(order.quantity.to_i * (order.unit_price == 0 ? order.product.menu_product.product.price : order.unit_price) + extra_price.to_f) %>
 							</td>
-
-							<td><%= check_box_tag "orders[]", order.id %></td>
+							<td><%= number_field_tag "bill[orders][][quantity]", order.quantity, min: 1, max: order.quantity %></td>
+							<td><%= check_box_tag "bill[orders][][id]", order.id %></td>
 						</tr>
 					<% end %>
 				<% end %>

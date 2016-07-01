@@ -15,7 +15,7 @@ class BillsController < ApplicationController
   end
 
   def submit_split
-    Bill.find(params[:id]).split(params[:orders])
+    Bill.find(params[:id]).split(params[:bill][:orders])
     respond_to do |format|
       format.html { redirect_to bills_path, notice: 'Bill was successfully created.' }
       format.json { render json: @bill, status: :created, location: @bill }
