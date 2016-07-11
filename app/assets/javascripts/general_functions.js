@@ -6,19 +6,21 @@ function setFontSize(){
 	var hfontSize;
 
 	if(window.innerHeight <= 450){
-		hfontSize = 60;
+		hfontSize = 90;
 	}
 	else{
 		height = 880 - height;
-		hfontSize = 100 - (height*40)/630;
+		hfontSize = 100 - (height*20)/630;
 	}
+
 	if(window.innerWidth <= 670){
-		wfontSize = 60;
+		wfontSize = 90;
 	}
 	else{
 		width = 1920 - width;
-		wfontSize = 100 - (width*40)/1250;
+		wfontSize = 100 - (width*20)/1250;
 	}
+
 	if(wfontSize <= hfontSize){
 		fontSize = wfontSize;
 	}

@@ -120,7 +120,7 @@ body.sessions.new{
 }
 
 body:not(.sessions){
-	padding-top: 3rem;
+	padding-top: 4rem;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -351,7 +351,7 @@ header{
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 3rem;
+	height: 4rem;
 	background-color: white;
 	border-bottom: 0.2rem solid $light_gray;
 	z-index: 2;
@@ -368,7 +368,7 @@ header{
 		padding: 0;
 		overflow: hidden;
 		li{
-			height: 3rem;
+			
 			line-height: 2.6rem;
 			background-color: white;
 			border-bottom: 1px solid $gray;
@@ -385,11 +385,13 @@ header{
 		}
 		li:first-child{
 			border-bottom: none;
+			height: 4rem;
 			a{
 				color: $green;
-				width: auto;
-				text-align: left;
+				width: 4rem;
+				text-align: center;
 				height: 100%;
+				line-height: 3.6rem;
 			}
 		}
 		li:hover,li.active{
@@ -408,15 +410,16 @@ header{
 			a{
 				background-color: $green;
 				color: white;
+
 			}
 		}
 	}
 	div.actions{
 		position: absolute;
-		height: 3rem;
-		line-height: 3rem;
+		height: 4rem;
+		line-height: 4rem;
 		top: 0;
-		left: 3rem;
+		left: 4rem;
 		&.right{
 			left: auto;
 			right: 0;
@@ -426,7 +429,9 @@ header{
 			height: 100%;
 			padding: 0.2rem 1rem;
 			color: $green;
-			line-height: 2.6rem;
+			line-height: 3.6rem;
+			width: 4rem;
+			text-align: center;
 			&:hover{
 				background-color: $green;
 				color: white;
@@ -493,8 +498,8 @@ header{
 
 div.label-container{
 	position: fixed;
-	top: 7.5rem;
-	height: calc(100% - 7.5rem);
+	top: 9.7rem;
+	height: calc(100% - 9.7rem);
 	max-width: 3rem;
 	overflow: hidden;
 	pointer-events: none;
@@ -566,8 +571,8 @@ div.label-container{
 					a{
 						display: block;
 						color: white;
-						font-size: 1rem;
-						line-height: 2rem;
+						font-size: 1.3rem;
+						line-height: 2.3rem;
 						padding: 0.5rem 1rem;
 						background-color: $red;
 						text-transform: uppercase;
