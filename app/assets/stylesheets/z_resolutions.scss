@@ -1,8 +1,11 @@
 @media(max-width: 500px){
 	article div.inner .tab-links a{
-		width: 6rem;
-		height: 6rem;
-		line-height: 2.3rem;
+		width: 5rem;
+		height: 5rem;
+		line-height: 2rem;
     padding-top: 1rem;
+    i{
+    	font-size: 2rem;
+    }
 	}
 }
