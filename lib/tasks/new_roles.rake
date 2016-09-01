@@ -1,4 +1,5 @@
-# Please add any new role here. do not run seed roles, just run on new environments.
+# Please add any new role here. do not run seed roles on existing environment that is for new environments.
+# any new role should be added here.
 namespace :roles do
   desc "Adds new roles"
   task :new => [:environment] do
