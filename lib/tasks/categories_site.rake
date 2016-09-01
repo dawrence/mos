@@ -1,6 +1,6 @@
 namespace :categories do
 	desc "Creates the configuration for default kitchen"
-	task :escondida => [:environment] do
+	task :escondida_products => [:environment] do
     [
       'Entradas',
       'Fuertes',
@@ -15,6 +15,8 @@ namespace :categories do
       ].each_with_index do |cat,i|
         ProductFamily.create(name: cat, image: '/images/product_families/1.png', order: i+1)
     end
+  end
+  task :escondida_supplies => [:environment] do
     [
       'Verduras y Legumbres',
       'Carnes',
