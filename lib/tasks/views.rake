@@ -1,7 +1,7 @@
 namespace :views do
 	desc "initialize db views"
 	task :queue_products => [:environment] do
-		ActiveRecord::Base.execute <<-SQL
+		ActiveRecord::Base.connection.execute <<-SQL
 	  	create or replace view queue_products
 	  	as
 	  	  select products.menu_product_id as product_id,
@@ -17,7 +17,7 @@ namespace :views do
   		SQL
   	end
 	task :paid_products => [:environment] do
-	  	ActiveRecord::Base.execute <<-SQL
+	  	ActiveRecord::Base.connection.execute <<-SQL
 		  		drop view paid_products;
 		  		create view paid_products
 		  		as 
@@ -60,7 +60,7 @@ namespace :views do
 			SQL
 	end
 	task :inventories => [:environment] do 
-	  	ActiveRecord::Base.execute <<-SQL
+	  	ActiveRecord::Base.connection.execute <<-SQL
 	       create or replace view inventories
 	       as
 	       select inventory_movements.supply_id as supply_id        ,
