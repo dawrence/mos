@@ -18,7 +18,6 @@ namespace :views do
   	end
 	task :paid_products => [:environment] do
 	  	ActiveRecord::Base.connection.execute <<-SQL
-		  		drop view paid_products;
 		  		create view paid_products
 		  		as 
 		  		select products.menu_product_id as product_id,
