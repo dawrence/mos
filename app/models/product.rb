@@ -22,11 +22,13 @@ class Product < ActiveRecord::Base
   end
 
   def save_kitchens
-    if kitchens.empty? && !original && menu_product
+    if kitchens.empty? && menu_product
       menu_product.product.kitchens.each do |k|
         kitchens << k
       end
+      Product.skip_callback(:save,:after,:save_kitchens)
       save!
+      Product.set_callback(:save,:after,:save_kitchens)
     end
   end
 
