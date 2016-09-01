@@ -15,10 +15,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: mos_development
+  database: escondida_dev
   pool: 5
   username: mos
-  password: 1234
+  password: F0uR_S3cT0r
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -41,15 +41,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: mos_test
+  database: escondida_test
   pool: 5
   username: mos
-  password: 1234
+  password: F0uR_S3cT0r
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: mos_production
+  database: escondida_prd
   pool: 5
   host: localhost
   username: mos
