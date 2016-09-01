@@ -22,7 +22,7 @@ class Product < ActiveRecord::Base
   end
 
   def save_kitchens
-    if kitchens.empty?
+    if kitchens.empty? && !original
       menu_product.product.kitchens.each do |k|
         kitchens << k
       end
