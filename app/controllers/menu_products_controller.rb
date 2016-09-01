@@ -82,9 +82,10 @@ class MenuProductsController < ApplicationController
   def update
     @menu_product = MenuProduct.includes([product: :ingredients]).find(params[:id])
     ingredients = []
-
-    params[:menu_product][:products_attributes]["0"][:ingredients_attributes].each do |i|
-      ingredients += [i] unless i[:quantity].to_f == 0 
+    if params[:menu_product][:products_attributes]["0"][:ingredients_attributes]
+      params[:menu_product][:products_attributes]["0"][:ingredients_attributes].each do |i|
+        ingredients += [i] unless i[:quantity].to_f == 0 
+      end
     end
 
     product= Product.create!(price: params[:menu_product][:products_attributes]["0"][:price], ingredients_attributes:  ingredients, 
