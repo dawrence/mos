@@ -12,7 +12,7 @@ namespace :categories do
       'Cervezas',
       'Gaseosas',
       'Jugos'
-      ].each_with_index do |i,cat|
+      ].each_with_index do |cat,i|
         ProductFamily.create(name: cat, image: '/images/product_families/1.png', order: i+1)
       [
         'Verduras y Legumbres',
