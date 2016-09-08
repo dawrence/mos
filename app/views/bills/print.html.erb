@@ -50,7 +50,7 @@
 			<p><%=@setting.city.upcase %></p>	
 			<p><%="TEL: #{@setting.telephone}" %></p>	
 			<% if B_INCREMENT && ([:cash, :card].include? @bill.payment_type.to_sym )%>	
-				<p><b>Factura de Venta No: <span style="color:red;"><%= "#{@setting.prefix.upcase}-#{@bill.billing_number}"%></span></b></p>
+				<p><b>Remisión de Venta No: <span style="color:red;"><%= "#{@setting.prefix.upcase}-#{@bill.billing_number}"%></span></b></p>
 			<% end %>
 			<span>
 				<b><%= t(:date)%></b>
