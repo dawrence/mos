@@ -11,3 +11,37 @@ All that you need is located here  http://soporte.4-sector.com/w/
 
 
 See you around!
+
+== Clone on the server
+To clone on the server use this to add the private key
+
+```
+eval `ssh-agent -s`
+ssh-add ~/.ssh/production
+```
+
+== Deployment.
+
+First, `git pull origin master` then create a branch to store the new instance. i.e. `git checkout -b newbar_prd`
+
+change the `database.yml` to add the new db config.
+
+```
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: newbar_test
+  pool: 5
+  username: mos
+  password: F0uR_S3cT0r
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: newbar_prd
+  pool: 5
+  host: localhost
+  username: mos
+  password: F0uR_S3cT0r
+
+```
