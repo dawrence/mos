@@ -45,3 +45,47 @@ production:
   password: F0uR_S3cT0r
 
 ```
+
+now, setup the database with :
+
+```
+rake db:setup
+```
+
+seed the initial data with 
+
+```
+rake db:seed
+```
+
+now create an user. this could be the one
+
+```
+User.create(email:"superadmin@4.sector.com", password:"F0uR_S3cT0r".password_confirmation:"F0uR_S3cT0r", id_number:"00000000", role:0)
+```
+
+run the following rake tasks in this order:
+
+```
+rake roles:new
+```
+
+```
+rake users:setup
+```
+
+```
+rake kitchens:initialize
+```
+
+```
+rake views:queue_products
+```
+
+```
+rake views:paid_products
+```
+
+```
+rake views:inventories
+```
