@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160420034926) do
+ActiveRecord::Schema.define(:version => 20170202170244) do
 
   create_table "additionals", :force => true do |t|
     t.integer  "product_id"
@@ -62,6 +62,22 @@ ActiveRecord::Schema.define(:version => 20160420034926) do
     t.float    "tips_total"
     t.float    "total_discount",  :default => 0.0
   end
+
+  create_table "customers", :force => true do |t|
+    t.text     "national_id"
+    t.text     "name"
+    t.text     "last_name"
+    t.text     "tel"
+    t.text     "email"
+    t.text     "address"
+    t.integer  "ocurrences"
+    t.boolean  "confirmed"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "customers", ["id"], :name => "index_customers_on_id"
+  add_index "customers", ["national_id"], :name => "index_customers_on_national_id"
 
   create_table "discount_vouchers", :force => true do |t|
     t.string   "name"
@@ -212,7 +228,7 @@ ActiveRecord::Schema.define(:version => 20160420034926) do
     t.string   "date"
     t.datetime "created_at",                                                   :null => false
     t.datetime "updated_at",                                                   :null => false
-    t.datetime "cutoff_date",               :default => '2016-04-09 21:31:27'
+    t.datetime "cutoff_date",               :default => '2015-02-19 04:57:06'
   end
 
   create_table "supplies", :force => true do |t|

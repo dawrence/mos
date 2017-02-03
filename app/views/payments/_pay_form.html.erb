@@ -1,23 +1,28 @@
 <div class="bill">
 	<%= form_tag(pay_bill_path, method: :put, remote: true ) do |f| %>
-	<%= hidden_field_tag "id", @bill.id %> 
+	<%= hidden_field_tag "id", @bill.id %>
 	<div class="row">
-	    
-  	<div class="columns small-12 medium-6 large-3">
+
+	   <div class="columns small-12 medium-6 large-2">
+      <%= label_tag :client_id, "CC:" %>
+      <%= text_field_tag :client_id, "", placeholder:"Cédula cliente" %>
+    </div>
+
+  	<div class="columns small-12 medium-6 large-2">
       <%= label_tag :client_name, "Nombre del cliente:" %>
       <%= text_field_tag :client_name, "", placeholder:"Nombre de cliente" %>
     </div>
 
-  	<div class="columns small-12 medium-6 large-3">
+  	<div class="columns small-12 medium-6 large-2">
       <%= label_tag :client_address, "Dirección" %>
       <%= text_field_tag :client_address, "", placeholder:"Dirección" %>
     </div>
-  	<div class="columns small-12 medium-6 large-3">
+  	<div class="columns small-12 medium-6 large-2">
       <%= label_tag :client_phone, "Teléfono" %>
       <%= text_field_tag :client_phone, "", placeholder:"Teléfono" %>
     </div>
 
-  	<div class="columns small-12 medium-6 large-3">
+  	<div class="columns small-12 medium-6 large-2">
 	    <%= label_tag :client_email, "Email" %>
 	    <%= text_field_tag :client_email, "", placeholder:"Email" %>
     </div>
@@ -62,7 +67,7 @@
 			<% end %>
 		<% end %>
 	</div>
-	
+
 		<%= submit_tag t(:accept), class: "button success" %>
 	<% end %>
 </div>

@@ -14,9 +14,10 @@
 log/*.log
 *.log
 dump/*.*
-/tmp
+/tmp/cache/
 /public/assets
 /tmp/cache
 log.txt
+/log/
 .DS_store
 Gemfile.lock
