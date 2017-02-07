@@ -1,5 +1,5 @@
 <div class="table" id ="closing_stage">
-  <% expense = ClosingStage.last.expenses.sum(&:value) %>
+  <% expense =ClosingStage.last ? ClosingStage.last.expenses.sum(&:value) : 0 %>
   <dl>
   	<dt>Gastos Reportados</dt>
   	<dd>(<%= colombian_currency  expense %>)</dd>
