@@ -1,7 +1,8 @@
 <div class="table" id ="closing_stage">
+  <% expense = ClosingStage.last.expenses.sum(&:value) %>
   <dl>
   	<dt>Gastos Reportados</dt>
-  	<dd>(<%= colombian_currency Expense.uncounted.each.sum(&:value) %>)</dd>
+  	<dd>(<%= colombian_currency  expense %>)</dd>
     <% unless ClosingStage.today_yet?%>
     	<dt>Ventas del Sistema Sin Propinas </dt>
     	<dd><%= colombian_currency Bill.get_current_paid.sum(&:price) %></dd>
@@ -14,7 +15,7 @@
         <dt>Total Ventas</dt>
         <dd><%= colombian_currency Bill.get_current_paid.sum(&:total) %></dd>
       	<dt>Total Ventas - Gastos</dt>
-      	<dd><%= colombian_currency(Bill.get_current_paid.sum(&:total) - Expense.uncounted.each.sum(&:value)) %></dd>
+      	<dd><%= colombian_currency(Bill.get_current_paid.sum(&:total) - expense) %></dd>
     <% end %>
   </dl>
   <% if ClosingStage.today_yet? %>

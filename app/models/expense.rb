@@ -10,13 +10,13 @@ class Expense < ActiveRecord::Base
   belongs_to :closing_stage
 
 
-  def self.mark_as_counted
+  def self.mark_as_counted(closing_stage_id=nil)
   	all.each do |e|
-  		e.mark_as_counted
+  		e.mark_as_counted(closing_stage_id)
   	end
   end
 
-  def mark_as_counted(closing_stage_id)
+  def mark_as_counted(closing_stage_id=nil)
   	self.counted = true
     self.closing_stage_id = closing_stage_id
   	self.save

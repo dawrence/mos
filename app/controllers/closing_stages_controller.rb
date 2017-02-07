@@ -14,7 +14,7 @@ class ClosingStagesController < ApplicationController
 
   def create
   	closing_stage = ClosingStage.create(closing_stage_params)
-  	Expense.uncounted(closing_stage.id).mark_as_counted
+  	Expense.uncounted(closing_stage.id).mark_as_counted(closing_stage.id)
   	redirect_to bills_path
   end
 
