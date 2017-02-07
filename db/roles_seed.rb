@@ -1,5 +1,5 @@
-# Pedidos 
-# new roles should be added here. DO NOT RUN THIS ON OLD SYSTEMS. 
+# Pedidos
+# new roles should be added here. DO NOT RUN THIS ON OLD SYSTEMS.
 Role.delete_all
 Role.create(name: "Edicion de Pedidos",description: "Edicion de pedidos basica. Resumen de pedidos ", identifier: "bills_edition",role_type: "module")
 # Acciones para cada pedido
@@ -28,3 +28,5 @@ Role.create(name: "Admon Configuracion",description: "Permite administrar la con
 Role.create(name: "Admon Descuentos",description: "Administracion de descuentos", identifier: "discount_management",role_type: "module")
 Role.create(name: "Admon Productos",description: "Administracion de productos y suministros", identifier: "product_management",role_type: "module")
 Role.create(name: "Admon Cocinas",description: "Administracion de cocinas", identifier: "kitchen_management",role_type: "module")
+Role.create(name: "Busqueda de Gastos", description:"Busqueda de Gastos", identifier: "filter_expenses", role_type: "report")
+Role.create(name: "Clientes", description:"Lista de Clientes", identifier: "index_customer", role_type: "module")

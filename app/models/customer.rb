@@ -5,10 +5,10 @@ class Customer < ActiveRecord::Base
 
   before_save :set_ocurrence
 
-  def set_ocurrence
-    c = Customer.find_by(national_id: self.national_id)
-    c.update_attributes(ocurrences: c.ocurrences + 1) if c
-  end
+  paginates_per 15
 
+  def set_ocurrence
+    self.ocurrences = self.ocurrences ? self.ocurrences : 1
+  end
 
 end

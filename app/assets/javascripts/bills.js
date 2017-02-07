@@ -10,7 +10,7 @@ jQuery(function(){
 		e.preventDefault();
 		$(this).closest(".bill-notes").toggleClass("editable");
 	})
-	
+
  $(".prepare_bill").on('click',function(e){
  	e.preventDefault();
  	if(confirm("¿Desea colocar este pedido como terminado?") == true){
@@ -24,17 +24,16 @@ jQuery(function(){
   $("#customization").delegate('.ok_ingredients',"click",ok_ingredients);
   $("#customization").delegate('.close_ingredients',"click",close_ingredients);
   $("#additionals").delegate('.close_additionals',"click",close_additionals);
-
   $("#customization").delegate('.ingredient_to_add',"click",set_quantity);
-  
 
-	
+
+
 	$(window).bind("pageshow",function(){
 		$("#bill_price").val($("#bill_price").attr("value"));
 	});
 
 	$("body").delegate('.mod_btn',"click",function(e){
-		
+
 			parent = $(this).closest('tr');
 			$(".product_to_order").each(function(){$(this).removeClass("modifying_product");});
 			parent.addClass("modifying_product")
@@ -51,8 +50,8 @@ jQuery(function(){
 				});
 				$('#botActions .scope').addClass('fixed-bug');
 			}
-			
-		
+
+
 	 });
 
 	$("body").delegate('.additional_btn',"click",function(e){
@@ -102,7 +101,7 @@ jQuery(function(){
 
 });
 
-function rmv_bil_prd(link,pid,price){		
+function rmv_bil_prd(link,pid,price){
 	//retrieve data fields
 	event.preventDefault();
 	q = parseInt($(link).parent().siblings(".order_quantity").children("input[type=hidden]").val());
@@ -131,8 +130,8 @@ function ok_ingredients(e){
 	copy = parent.clone();
 	set_products_ing();
 	copy.find(".product_information").empty().remove();
-	$(".product_to_order.modifying_product").find(".show_ingredients").empty().remove();	
-    $(".product_to_order.modifying_product > td.ingredients_attributes").append(copy);	
+	$(".product_to_order.modifying_product").find(".show_ingredients").empty().remove();
+    $(".product_to_order.modifying_product > td.ingredients_attributes").append(copy);
     $(".product_to_order.modifying_product").children("td").children(".mod_btn").removeAttr("data-remote");
     copy.hide();
     close_ingredients(e);
@@ -155,7 +154,7 @@ function set_products_ing(){
 	ul = $(".product_to_order.modifying_product").find(".product_custom_ing");
 	ul.empty();
 	$("#customization").find(".ingredient_to_add:not(:checked)").each(function(index,element){
-		name = $(element).siblings(".ingredient_name").html();	
+		name = $(element).siblings(".ingredient_name").html();
 		ul.append("<li>"+"Sin "+name+" </li>");
 	});
 
@@ -170,7 +169,7 @@ function close_additionals(e){
 		parent.remove();
 		$("#products_selection").fadeIn();
 		$('#botActions .scope').removeClass('fixed-bug');
-	});	
+	});
 }
 
 function add_ingredient(ht,item){
@@ -187,7 +186,7 @@ function delete_ingredients(e){
 
 
 function set_quantity(){
-	quantity  = $(this).parent().data("quantity");	
+	quantity  = $(this).parent().data("quantity");
 	if($(this).is(":checked")){
 		$(this).siblings(".ingredient_quantity").val(quantity);
 	}
@@ -199,7 +198,7 @@ function set_quantity(){
 function additional_to_product(html,add_id,price){
   p_to_or = $(".product_to_order[data-additional='true']");
   additional = p_to_or.find(".product_additional[data-additional-id="+add_id+"]");
-  price  =parseInt(price);	
+  price  =parseInt(price);
   $("#bill_price").val(parseInt($("#bill_price").val()) + parseInt(price));
 
   if(additional.length > 0){
@@ -215,7 +214,7 @@ function additional_to_product(html,add_id,price){
 
 function delete_additional (element,price) {
 	tr = $(element).parent().parent();
-	price  = parseInt(price);	
+	price  = parseInt(price);
 	new_price = parseInt($("#bill_price").val()) - parseInt(price);
   $("#bill_price").val(new_price < 0 ? 0: new_price);
 
@@ -244,3 +243,5 @@ function bindBills(){
 		$("div.contents div#" + $(this).data("tab")).addClass("shown")
 	})
 }
+
+
