@@ -37,13 +37,13 @@ Mos::Application.routes.draw do
   post 'bill_split', to: 'bills#submit_split'
 
   post 'group_bills', to: 'tables#group_bills'
-
+  
   get  "print_bill", to: "bills#print"
   put  "pending_bill", to: "bills#pending_bill"
   get  "print_z_report", to: "bills#z_report"
   get  "cancel_form_bill", to: "bills#cancel_form"
   get "supplies_sumarize", to: "supplies#supplies_sumarize"
-
+  
   put  "bills/edit_table", to: "bills#edit_table", as: "view_cng_table"
   put  "bills/update_table", to: "bills#update_table", as: "cng_table"
 
@@ -75,8 +75,6 @@ Mos::Application.routes.draw do
   get "products/check_availability", to: "products#check_availability", as: "vld_prod"
 
 
-  get 'customer', to: 'customers#show', as: 'customer'
-  get 'customers', to: 'customers#index', as: 'customers'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

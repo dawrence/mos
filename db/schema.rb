@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170206191200) do
+ActiveRecord::Schema.define(:version => 20170202170244) do
 
   create_table "additionals", :force => true do |t|
     t.integer  "product_id"
@@ -83,10 +83,8 @@ ActiveRecord::Schema.define(:version => 20170206191200) do
     t.string   "name"
     t.string   "discount_type"
     t.float    "value"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.integer  "ocurrences"
-    t.boolean  "by_ocurrence",  :default => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "expenses", :force => true do |t|
@@ -94,10 +92,9 @@ ActiveRecord::Schema.define(:version => 20170206191200) do
     t.float    "value"
     t.string   "receipt_number"
     t.integer  "user_id"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.boolean  "counted",          :default => false
-    t.integer  "closing_stage_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "counted",        :default => false
   end
 
   add_index "expenses", ["user_id"], :name => "index_expenses_on_user_id"

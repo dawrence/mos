@@ -1,4 +1,4 @@
-<div class="bill payment_form">
+<div class="bill">
 	<%= form_tag(pay_bill_path, method: :put, remote: true ) do |f| %>
 	<%= hidden_field_tag "id", @bill.id %>
 	<div class="row">
@@ -25,11 +25,6 @@
   	<div class="columns small-12 medium-6 large-2">
 	    <%= label_tag :client_email, "Email" %>
 	    <%= text_field_tag :client_email, "", placeholder:"Email" %>
-    </div>
-
-    <div class="columns small-12 medium-6 large-2">
-      <%= label_tag :add_client, "Agregar Cliente" %>
-      <%= check_box_tag :add_client, 'add_client', true%>
     </div>
 
 

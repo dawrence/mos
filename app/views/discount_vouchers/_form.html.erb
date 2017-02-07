@@ -11,25 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field columns small-12 medium-2">
+  <div class="field columns small-12 medium-4">
     <%= f.label :name, t(:name) %>
     <%= f.text_field :name %>
   </div>
-  <div class="field columns small-12 medium-2">
+  <div class="field columns small-12 medium-4">
     <%= f.label :discount_type, t(:discount_type) %>
     <%= f.select :discount_type, [["Porcentaje", "per"], ["Valor", "val"],["Variable", "var"]] %>
   </div>
-  <div class="field columns small-12 medium-2">
+  <div class="field columns small-12 medium-4">
     <%= f.label :value, t(:value) %>
     <%= f.text_field :value %>
-  </div>
-  <div class="field columns small-12 medium-2">
-    <%= f.label :ocurrences, 'Ocurrencias' %>
-    <%= f.number_field :ocurrences, value: 1%>
-  </div>
-  <div class="field columns small-12 medium-2">
-    <%= f.label :by_ocurrence, 'Por ocurrencias?' %>
-    <%= f.check_box :by_ocurrence%>
   </div>
   <div class="actions columns small-12">
     <%= f.submit t(:save), disable_with: t(:saving), class: "button success"  %>

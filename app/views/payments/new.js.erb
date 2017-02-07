@@ -1,46 +1,6 @@
-var get_client = function(e){
-  var field = $(e.currentTarget);
-  $.ajax({
-    url: '<%= customer_path %>',
-    method: 'GET',
-    accepts: 'json',
-    data: {
-      client_id: field.val()
-    },
-    beforeSend: function(data){
-      $('#client_name').attr('disabled',true);
-      $('#client_address').attr('disabled',true);
-      $('#client_phone').attr('disabled',true);
-      $('#client_email').attr('disabled',true);
-    },
-    success:function(data){
-      customer = data.customer
-      $('#client_name').val(customer.name);
-      $('#client_address').val(customer.address);
-      $('#client_phone').val(customer.tel);
-      $('#client_email').val(customer.email);
-      $('.discount-ocurrence').remove();
-      if(data.discounts){
-        $('.pick-discount').append(data.discounts);
-        $('.discount-ocurrence').on("focus",".dsc_var",function(e){
-          var element = $(e.currentTarget);
-          $("#discount_"+element.data("id")).prop("checked",true);
-        });
-      }
-    },
-    complete:function(data){
-      $('#client_name').removeAttr('disabled');
-      $('#client_address').removeAttr('disabled');
-      $('#client_phone').removeAttr('disabled');
-      $('#client_email').removeAttr('disabled');
-    }
-  });
-};
 <% if @vld%>
   modal.find('.modal-body').html('<%= j render "pay_form" %>');
 	modal.foundation('reveal', 'open');
-  $('.payment_form').delegate('#client_id', 'focusout', get_client);
-
 <% else %>
 	alert('<%= show_alert(@notice) %>');
 <% end %>

@@ -1,21 +1,10 @@
 class CustomersController < ApplicationController
-  include ApplicationHelper
-  include DiscountVouchersHelper
+
   respond_to :json
 
   def show
-    @customer = Customer.where(national_id: params[:client_id]).first
-    discounts = DiscountVoucher.where(by_ocurrence: true).map do |s|
-      s if @customer.ocurrences % s.ocurrences == 0
-    end
-    if @customer
-      render json: {
-        customer: @customer,
-        discounts: view_context.render_discounts(discounts)
-        }, status: 200
-    else
-      render json: {}, status: 404
-    end
+    customer = Customer.find_by(national_id: params[:client_id])
+    render json: customer, status: 200
   end
 
   def create
@@ -24,9 +13,7 @@ class CustomersController < ApplicationController
   end
 
   def index
-    @customers = Customer.page(params[:page]).per(15)
-    respond_to do |format|
-      format.html
-    end
+    render json: Customer.all
+    render json: customer, status: 200
   end
 end
