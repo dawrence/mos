@@ -1,10 +1,10 @@
 module DiscountVouchersHelper
 
   def render_discounts(discounts)
-    return if discounts.empty?
+    return if discounts.compact.empty?
     content_tag(:div, class: 'discount-ocurrence') do
       safe_join(
-        discounts.map do |d|
+        discounts.compact.map do |d|
           radio_button_tag(:discount, d.id, false) +
           label_tag("discount_#{d.id}")do
             concat content_tag(:span, d.name)

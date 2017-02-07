@@ -47,7 +47,7 @@ class PaymentsController < ApplicationController
 	      @bill.client_email = params[:client_email]
 	      @bill.payment_type = params[:payment_type]
 
-        if params[:add_client] == 'add_client'
+        if params[:add_client] == 'add_client' && params[:national_id].present?
           create_client({
             national_id: params[:client_id],
             tel: params[:client_phone],
