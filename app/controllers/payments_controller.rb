@@ -107,10 +107,8 @@ class PaymentsController < ApplicationController
   def create_client(data={})
     customer = Customer.new(data)
     if customer.valid?
-      puts 'customer valid'
       customer.save
     else
-      puts 'cuystomer invalid'
       c = Customer.where(national_id: data[:national_id]).first
       c.ocurrences = (c.ocurrences ? c.ocurrences : 1) + 1
       c.save
