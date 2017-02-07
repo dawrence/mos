@@ -6,7 +6,7 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.where(national_id: params[:client_id]).first
     discounts = DiscountVoucher.where(by_ocurrence: true).map do |s|
-      s if @customer.ocurrences % s.ocurrences == 0
+      s if (@customer.ocurrences + 1 ) % s.ocurrences == 0
     end
     if @customer
       render json: {
