@@ -9,4 +9,15 @@ namespace :roles do
       d.save
     end
   end
+  task customer: [:environment] do
+    if Role.where(identifier:'index_customer').size == 0
+      r = Role.create(name: "Clientes", description:"Lista de Clientes", identifier: "index_customer", role_type: "module")
+    end
+  end
+
+  task expenses: [:environment] do
+    if Role.where(identifier:'filter_expenses').size == 0
+      r = Role.create(name: "Busqueda de Gastos", description:"Busqueda de Gastos", identifier: "filter_expenses", role_type: "report")
+    end
+  end
 end

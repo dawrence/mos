@@ -22,6 +22,9 @@
 	<% if allowed? :users_management %>
 		<li class="<%= 'active' if controller.controller_name == 'users' && controller.action_name == 'index' %>"><%= link_to 'Usuarios', users_path, class: "users-menu" %></li>
 	<% end %>
+    <% if allowed? :index_customer %>
+    <li class="<%= 'active' if controller.controller_name == 'customers' && controller.action_name == 'index' %>"><%= link_to 'Clientes', customers_path, class: "users-menu" %></li>
+  <% end %>
 	<% if allowed? :settings_management%>
 		<li class="<%= 'active' if controller.controller_name == 'settings' %>"><%= link_to 'Configuración', edit_setting_path(id:1), class: "settings-menu" %></li>
 	<% end %>

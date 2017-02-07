@@ -2,7 +2,7 @@ class ClosingStagesController < ApplicationController
   def privileges
     [{generic: [:closing_stage_management]}]
   end
-  
+
   def index
     init_date = params[:init_date] && !params[:init_date].empty? ? DateTime.strptime(params[:init_date], "%m/%d/%Y") : nil
     end_date  = params[:end_date] && !params[:end_date].empty? ?  DateTime.strptime(params[:end_date], "%m/%d/%Y") : nil
@@ -14,10 +14,9 @@ class ClosingStagesController < ApplicationController
 
   def create
   	closing_stage = ClosingStage.create(closing_stage_params)
-  	Expense.uncounted.mark_as_counted
+  	Expense.uncounted(closing_stage.id).mark_as_counted
   	redirect_to bills_path
   end
-
 
   protected
 
