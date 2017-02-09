@@ -167,13 +167,6 @@ article{
 	position: relative;
 	margin: 0 auto;
 	max-width: 60rem;
-	&:before {
-	  content: '';
-	  display: inline-block;
-	  height: 100%;
-	  vertical-align: middle;
-	  margin-right: -0.25em; /* Adjusts for spacing */
-	}
 	div.inner{
 		display: inline-block;
 	  vertical-align: middle;
@@ -230,7 +223,7 @@ article{
 		  height: 100%;
 		  position: static;
 		  padding-top: 3rem;
-		  	  
+
 		  select#tables,a.new-bill,a.new-element{
 		  	position: absolute;
 		  	top: 0;
@@ -368,7 +361,7 @@ header{
 		padding: 0;
 		overflow: hidden;
 		li{
-			
+
 			line-height: 2.6rem;
 			background-color: white;
 			border-bottom: 1px solid $gray;
@@ -527,7 +520,7 @@ div.label-container{
 	}
 	&.open{
 		max-width: 26rem;
-		overflow-y: auto; 
+		overflow-y: auto;
 	}
 	>div{
 		position: relative;
@@ -564,7 +557,7 @@ div.label-container{
 		div.scroll{
 			pointer-events: initial;
 			max-height: 100%;
-			overflow-y: auto; 
+			overflow-y: auto;
 			ul.accordion{
 				margin: 0;
 				li.accordion-navigation{
