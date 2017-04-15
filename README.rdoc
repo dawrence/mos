@@ -1,58 +1,30 @@
 == Welcome to MOS
 
-Hi you fucking developer. If you're seeing this without being a part of the 
+Hi you fucking developer. If you're seeing this without being a part of the
 exclusive family of 4-sector. you'll be prosecuted, hunted and tortured to death.
-Otherwise, welcome home boy :)
+Otherwise, welcome home aboard :)
 
 
 == Getting Started
 
-All that you need is located here  http://soporte.4-sector.com/w/
+This version of MOS is built on rails 3.2, and it needs ruby 1.9.3 to run. We highly recommend for *nix based OS to use RVM as the ruby engine for version management.
+
+It also uses postgreSQL as database engine. This version is dependant on the DB engine, so you must use postgreSQL on any environment you might want to run it.
+
+We use Devise as user authentication system, so you might need bcrypt running on your machine. This might be a headache for windows users but should be easily knocked out if you use the locked version on Gemfile.lock.
+
+All new features developed for this repo should be merge requested and tagged on any dev lead for code review. Its highly important to just merge into master and not on any onther branch. Deployment will be managed for any dev lead and in a soon future by CI and CD tools by gitlab.
+
+Join the team on slack 4-sector.slack.com for questions, story planning and anything else you might need from dev-leads and/or product-managers.
 
 
-See you around!
-
-== Clone on the server
-To clone on the server use this to add the private key
-
-```
-eval `ssh-agent -s`
-ssh-add ~/.ssh/production
-```
-
-== Deployment.
-
-First, `git pull origin master` then create a branch to store the new instance. i.e. `git checkout -b newbar_prd`
-
-change the `database.yml` to add the new db config.
-
-```
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: newbar_test
-  pool: 5
-  username: mos
-  password: F0uR_S3cT0r
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: newbar_prd
-  pool: 5
-  host: localhost
-  username: mos
-  password: F0uR_S3cT0r
-
-```
-
-now, setup the database with :
+To setup a database you need to run the next rake commands :
 
 ```
 rake db:setup
 ```
 
-seed the initial data with 
+seed the initial data with
 
 ```
 rake db:seed
