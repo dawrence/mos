@@ -31,13 +31,13 @@ seed the initial data with
 rake db:seed
 ```
 
-now create an user. this could be the one
+Now create a user. You can always use your preferred values or just use the next one (remember to run this inside rails console):
 
 ```
 User.create(email:"admin@example.com", password:"12345678".password_confirmation:"12345678", id_number:"00000000", role:0)
 ```
 
-run the following rake tasks in this order:
+run the following rake tasks in this order to populate database with needed values:
 
 ```
 rake roles:new
@@ -62,3 +62,4 @@ rake views:paid_products
 ```
 rake views:inventories
 ```
+If theres something working not propertly dont hesitate to ask any dev-lead. We are all here to learn and work together as a team.
