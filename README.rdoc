@@ -21,7 +21,7 @@ Join the team on slack 4-sector.slack.com for questions, story planning and anyt
 To setup a database you need to run the next rake commands :
 
 
-`rake db:setup`
+```rake db:setup```
 
 seed the initial data with
 
