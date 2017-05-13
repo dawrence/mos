@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
+	require 'csv'
   	protect_from_forgery
 	before_filter :set_locale
 	before_filter :authenticate_user!, :allowed?
-	
 	#before_filter :has_permission (current_user.id)
 	helper_method :is_admin, :is_owner, :is_waiter
 

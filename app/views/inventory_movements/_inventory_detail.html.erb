@@ -38,8 +38,15 @@
       </fieldset>
     </div>
     
-
-    <%= submit_tag "Buscar", class: 'button', data: {disable_with: "..."} %>
+    
+  <div class="row">
+    <div class="medium-1 columns">
+      <%= submit_tag "Buscar", class: 'button', data: {disable_with: "..."} %>
+    </div>
+    <div class="medium-11 columns">
+      <%= link_to raw('<i class="icon-save-floppy icon-white"></i>'), inventory_movements_path(format: "csv") %>
+    </div>  
+  </div>
   <% end %>
   <div class="inventory-list">
     <%=render partial: "inventory_list" %>
