@@ -1,5 +1,5 @@
 [
-    "categories_seeds",
+    #"categories_seeds",
     "roles_seed",
     "roles_by_user",
     "kitchen_seed"
