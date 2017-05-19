@@ -4,7 +4,7 @@
     <%= text_field_tag "init_date", "", placeholder: t(:init_date), class: 'fdatepicker' %>
     <%= text_field_tag "end_date", "", placeholder: t(:end_date), class: 'fdatepicker' %>
     <%= button_tag raw('<i class="icon-filter icon-white"></i>'), type: "submit", class: 'button', data: {disable_with: "..."} %>
-    <%= link_to raw('<i class="icon-save-floppy icon-white"></i>'), bills_path(format: "csv") %>
+    <%= link_to raw('<i class="icon-save-floppy white"></i>'), bills_path(format: "csv") %>
     <div>
       <b>Total:</b>
       <span id="closeout_total"></span>

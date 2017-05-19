@@ -5,15 +5,15 @@ class InventoryMovement < ActiveRecord::Base
   belongs_to :user
   
   def self.list
-  	select("description,movement_type,quantity as cnt")
-  	.group(:description,:movement_type,:quantity)
+  	select("created_at,description,movement_type,quantity as cnt").group(:created_at,:description,:movement_type,:quantity)
   end
   
   def self.to_csv
+    attributes = %w"created_at description movement_type cnt "
     CSV.generate do |csv|
-      csv << column_names
+      csv << attributes
       all.each do |result|
-        csv << result.attributes.values_at(*%w"description movement_type quantity cnt")
+        csv << result.attributes.values_at(*%w"created_at description movement_type cnt")
       end
     end
   end

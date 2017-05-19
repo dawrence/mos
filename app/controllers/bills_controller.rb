@@ -62,7 +62,7 @@ class BillsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @bills }
-      format.csv { send_data @products_list.to_csv, filename: "productb-#{Date.today}.csv" }
+      format.csv { send_data @products_list.to_csv, filename: "products-#{Date.today}.csv" }
     end
   end
 

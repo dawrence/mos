@@ -13,15 +13,16 @@ class PaidProduct < ActiveRecord::Base
   end
   
   def self.list
-  	select("product_name, product_id, unit_price, product_price, SUM(size) as cnt")
+  	select("product_id, product_name, unit_price, product_price, SUM(size) as cnt")
   	.group(:product_id,:product_name,:unit_price,:product_price)
   end
   
   def self.to_csv
+    attributes = %w"product_id product_name unit_price product_price cnt"
     CSV.generate do |csv|
-      csv << column_names
+      csv << attributes
       all.each do |result|
-        csv << result.attributes.values_at(*%w"product_name unit_price product_price cnt")
+        csv << result.attributes.values_at(*%w"product_id product_name unit_price product_price cnt")
       end
     end
   end
