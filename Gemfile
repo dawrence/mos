@@ -52,4 +52,5 @@ gem 'jquery-turbolinks', '2.1.0'
 
 group :development do
 	gem "rails-erd"
+	gem "pry-rails"
 end 

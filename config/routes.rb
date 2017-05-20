@@ -55,6 +55,7 @@ Mos::Application.routes.draw do
   get "bills_report", to: "bills#bills_report", as: "bills_report"
 
   resources :inventory_movements
+  
   post "inventory_movements_massive", to: "inventory_movements#massive_insert"
 
   resources :menu_products

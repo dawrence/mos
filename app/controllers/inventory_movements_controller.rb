@@ -8,9 +8,12 @@ class InventoryMovementsController < ApplicationController
 
   def index
     @supply_categories = SupplyCategory.includes([supplies: :inventory]).all
+    @inventory_movement = InventoryMovement.all
+    @inventory_list =  InventoryMovement.list
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @inventory_movements }
+      format.csv { send_data @inventory_list.to_csv, filename: "inventory-#{Date.today}.csv" }
     end
   end
 
@@ -121,5 +124,5 @@ class InventoryMovementsController < ApplicationController
         format.js
       end
   end
-
+  
 end

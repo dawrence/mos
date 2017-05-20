@@ -1,3 +1,4 @@
+
 <%= paginate @inv_by_spl, params: params, remote:true%>
 <table class="table table-hover table-bordered" border="0" style="width:100%">
   <thead>
@@ -8,7 +9,6 @@
       <th><%= t(:description) %></th>
       <th><%= t(:adjustment) %></th>
       <th><%= "Usuario" %></th>
-    </tr>
   </thead>
   <tbody>
     <% @inv_by_spl.each do |im| %>
@@ -23,3 +23,5 @@
     <% end %>
   </tbody>
 </table>
+
+	

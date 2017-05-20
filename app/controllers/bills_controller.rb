@@ -57,9 +57,12 @@ class BillsController < ApplicationController
     @all_supplies = Supply.get_supplies_sumarize(["queue"],get_today_default_range[:init_date],get_today_default_range[:end_date])
     @pending_bills = Bill.get_pending()
     @bills_paid = Bill.get_current_paid()
+    @products_list= PaidProduct.list
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @bills }
+      format.csv { send_data @products_list.to_csv, filename: "products-#{Date.today}.csv" }
     end
   end
 
