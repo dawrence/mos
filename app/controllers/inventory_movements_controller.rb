@@ -8,12 +8,9 @@ class InventoryMovementsController < ApplicationController
 
   def index
     @supply_categories = SupplyCategory.includes([supplies: :inventory]).all
-    @inventory_movement = InventoryMovement.all
-    @inventory_list =  InventoryMovement.list
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @inventory_movements }
-      format.csv { send_data @inventory_list.to_csv, filename: "inventory-#{Date.today}.csv" }
     end
   end
 
@@ -67,7 +64,7 @@ class InventoryMovementsController < ApplicationController
   # PUT /inventory_movements/1
   # PUT /inventory_movements/1.json
   def update
-    #@inventory_movement = InventoryMovement.find(params[:id])    
+    #@inventory_movement = InventoryMovement.find(params[:id])
     respond_to do |format|
         format.html { render action: "index" }
         format.json { render json: @inventory_movement.errors, status: :unprocessable_entity }
@@ -117,12 +114,12 @@ class InventoryMovementsController < ApplicationController
     end
     @vld = true
     rescue Exception
-      @vld = false 
+      @vld = false
       @notice = params.to_yaml
     ensure
       respond_to do |format|
         format.js
       end
   end
-  
+
 end

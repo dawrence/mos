@@ -24,7 +24,7 @@
               id: "movement_type__in"  %>
           <%= label_tag "movement_type[][in]", 'Entrada' %>
       </fieldset>
-      
+
       <fieldset class="medium-4 small-12 columns fields">
         <legend>Ajuste</legend>
           <%= check_box_tag 'adjustment', 'true',
@@ -37,15 +37,15 @@
           <%= select_tag :user_id,options_for_select(User.all.map{|u| [u.email, u.id]} << ["todos", -1], params[:user_id] ? params[:user_id] : -1)%>
       </fieldset>
     </div>
-    
-    
+
+
   <div class="row">
     <div class="medium-1 columns">
       <%= submit_tag "Buscar", class: 'button', data: {disable_with: "..."} %>
     </div>
-    <div class="medium-11 columns">
-      <%= link_to raw('<i class="icon-save-floppy icon-white"></i>'), inventory_movements_path(format: "csv") %>
-    </div>  
+    <% #<div class="medium-11 columns"> %>
+      <%# link_to raw('<i class="icon-save-floppy icon-white"></i>'), inventory_movements_path(format: "csv") %>
+    <% #</div>  %>
   </div>
   <% end %>
   <div class="inventory-list">
