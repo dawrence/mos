@@ -158,7 +158,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  browser-timezone-rails
+  browser-timezone-rails (= 0.2.00)
   coffee-rails (= 3.2.2)
   devise (= 2.2.4)
   foundation-datetimepicker-rails (= 0.2.1)
@@ -174,3 +174,6 @@ DEPENDENCIES
   sass-rails (= 3.2.6)
   turbolinks (= 2.5.3)
   uglifier (= 1.3.0)
+
+BUNDLED WITH
+   1.11.2

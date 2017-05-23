@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
 
-gem 'browser-timezone-rails'
+gem 'browser-timezone-rails', '0.2.00'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -53,4 +53,4 @@ gem 'jquery-turbolinks', '2.1.0'
 group :development do
 	gem "rails-erd"
 	gem "pry-rails"
-end 
+end
